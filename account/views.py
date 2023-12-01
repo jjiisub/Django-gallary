@@ -1,5 +1,6 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.views import View
@@ -39,16 +40,9 @@ class UserLogoutView(LogoutView):
     next_page = "gallery:artwork-list"
 
 
-# class ApplymentCreateView(CreateView):
-#     template_name = "account/applyment.html"
-#     form_class = ApplymentCreateForm
-#     success_url = reverse_lazy("gallery:artwork-list")
-
-class ApplymentCreateView(View):
+class ApplymentCreateView(LoginRequiredMixin, View):
     def get(self, request):
-        if not request.user.is_authenticated:
-            return redirect("account:login")
-        elif request.user.is_artist:
+        if request.user.is_artist:
             return redirect("gallery:artwork-list")
         form = ApplymentCreateForm
         context = {

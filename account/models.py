@@ -56,13 +56,14 @@ class Applyment(models.Model):
         ('f', '여자'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=16)
     gender = models.CharField(max_length=5, choices=GENDER_CHOICE)
     birth_date = models.DateField()
     email = models.EmailField()
     phone = models.CharField(validators=[phone_validator], max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
+    is_rejected = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

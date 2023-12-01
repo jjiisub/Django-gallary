@@ -22,21 +22,21 @@
         </div>
         <div class="mb-3">
             <label for="birth_date">생년월일</label>
-            <input type="birth_date" class="form-control" name="birth_date" id="birth_date"
+            <input type="text" class="form-control" name="birth_date" id="birth_date"
                 value="{{ form.birth_date.value|default_if_none:'' }}">
         </div>
         <div class="mb-3">
             <label for="email">이메일</label>
-            <input type="email" class="form-control" name="email" id="email"
+            <input type="text" class="form-control" name="email" id="email"
                 value="{{ form.email.value|default_if_none:'' }}">
         </div>
         <div class="mb-3">
-            <label for="phone">전화번호</label>
-            <input type="phone" class="form-control" name="phone" id="phone"
+            <label for="phone">연락처</label>
+            <input type="text" class="form-control" name="phone" id="phone"
                 value="{{ form.phone.value|default_if_none:'' }}">
         </div>
 
-        <button type="submit" class="btn btn-primary">작가 등록 신청</button>
+        <button type="submit" class="btn btn-primary">신청</button>
     </form>
 </div>
 
