@@ -3,6 +3,10 @@ import environ
 
 from pathlib import Path
 
+AUTH_USER_MODEL = 'account.User'
+
+LOGIN_REDIRECT_URL = '/'
+
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -27,6 +31,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Custom Apps
+    'account',
+    'gallery',
+    'management',
 ]
 
 MIDDLEWARE = [
