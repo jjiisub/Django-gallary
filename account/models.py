@@ -1,5 +1,7 @@
 from django.db import models
+from .validators import phone_validator
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+
 
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
@@ -48,7 +50,19 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 
-# class UserInfo(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     is_artist = models.BooleanField(default=False)
-#     is_manager = models.BooleanField(default=False)
+class Applyment(models.Model):
+    GENDER_CHOICE = [
+        ('m', '남자'),
+        ('f', '여자'),
+    ]
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    gender = models.CharField(max_length=5, choices=GENDER_CHOICE)
+    birth_date = models.DateField()
+    email = models.EmailField()
+    phone = models.CharField(validators=[phone_validator], max_length=15)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_approved = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name

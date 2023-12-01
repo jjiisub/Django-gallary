@@ -5,8 +5,8 @@ from account.models import User
 
 class Artist(models.Model):
     GENDER_CHOICE = [
-        ('m', '남성'),
-        ('f', '여성'),
+        ('m', '남자'),
+        ('f', '여자'),
     ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
