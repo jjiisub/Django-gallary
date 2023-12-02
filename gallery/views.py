@@ -10,11 +10,13 @@ from .forms import ArtworkCreateForm, ExhibitionCreateForm
 class ArtistListView(ListView):
     model = Artist
     ordering = '-created_at'
+    context_object_name = 'artists'
 
 
 class ArtworkListView(ListView):
     model = Artwork
     ordering = '-created_at'
+    context_object_name = 'artworks'
 
 
 class ArtworkCreateView(ArtistRequiredMixin, View):
