@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if applyments %}
+<form method="post" action="{% url 'management:apply' %}">
+    {% csrf_token %}
+    {% include "approve_reject_errors.html" %}
+    <table class="table table-hover text-center mt-5">
+        <thead class="thead">
+            <tr>
+                <th>이름</th>
+                <th>성별</th>
+                <th>생년월일</th>
+                <th>이메일</th>
+                <th>연락처</th>
+                <th>신청 일시</th>
+                <th>승인</th>
+                <th>반려</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for applyment in applyments %}
+            <tr>
+                <td>{{ applyment.name }}</td>
+                <td>{{ applyment.gender }}</td>
+                <td>{{ applyment.birth_date }}</td>
+                <td>{{ applyment.email }}</td>
+                <td>{{ applyment.phone }}</td>
+                <td>{{ applyment.created_at }}</td>
+                {% if applyment.is_approved %}
+                <td><input type="checkbox" checked disabled></td>
+                <td><input type="checkbox" disabled></td>
+                {% elif applyment.is_rejected %}
+                <td><input type="checkbox" disabled></td>
+                <td><input type="checkbox" checked disabled></td>
+                {% else %}
+                <td><input type="checkbox" name="approve" value="{{ applyment.pk }}"></td>
+                <td><input type="checkbox" name="reject" value="{{ applyment.pk }}"></td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-outline-secondary">적용</button>
+</form method="post" action="{% url 'gallery:artwork-create' %}">
+{% else %}
+<p class="mt-5">작가 등록 신청 내역이 없습니다.</p>
+{% endif %}
+{% endblock  %}

@@ -55,7 +55,7 @@ class Applyment(models.Model):
         ('m', '남자'),
         ('f', '여자'),
     ]
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=16)
     gender = models.CharField(max_length=5, choices=GENDER_CHOICE)
     birth_date = models.DateField()
