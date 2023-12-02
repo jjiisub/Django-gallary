@@ -27,7 +27,7 @@ class ApplymentManageView(ManagerOnlyMixin, View):
             applyments = Applyment.objects.all().order_by('-created_at')
             context = {
                 'applyments': applyments,
-                'errors': '승인과 반려를 동시에 체크할 수 없습니다.',
+                'errors': '승인과 반려를 동시에 선택할 수 없습니다.',
             }
             return render(request, "management/applyment.html", context)
 
