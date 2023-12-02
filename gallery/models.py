@@ -1,6 +1,7 @@
 from django.db import models
 
 from account.models import User
+from .validators import ArtworkPriceValidator, ArtworkSizeValidator
 
 
 class Artist(models.Model):
@@ -23,8 +24,8 @@ class Artist(models.Model):
 class Artwork(models.Model):
     title = models.CharField(max_length=64)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artworks')
-    price = models.IntegerField()
-    size = models.IntegerField()
+    price = models.IntegerField(validators=[ArtworkPriceValidator])
+    size = models.IntegerField(validators=[ArtworkSizeValidator])
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
