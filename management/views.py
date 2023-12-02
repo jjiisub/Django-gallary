@@ -20,7 +20,6 @@ class ApplymentManageView(ManagerOnlyMixin, View):
     def post(self, request):
         approve_list = request.POST.getlist('approve')
         reject_list = request.POST.getlist('reject')
-
         try:
             ApproveRejectValidator(approve_list, reject_list)
         except:
@@ -30,7 +29,6 @@ class ApplymentManageView(ManagerOnlyMixin, View):
                 'errors': '승인과 반려를 동시에 선택할 수 없습니다.',
             }
             return render(request, "management/applyment.html", context)
-
         Applyment.objects.filter(id__in=approve_list).update(is_approved=True, is_rejected=False)
         Applyment.objects.filter(id__in=reject_list).update(is_rejected=True, is_approved=False)
         User.objects.filter(applyment__pk__in=approve_list).update(is_artist=True)
