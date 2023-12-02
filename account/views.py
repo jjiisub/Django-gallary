@@ -22,10 +22,8 @@ class UserLoginView(LoginView):
     redirect_authenticated_user = True
 
     def get_success_url(self):
-        if self.request.user.is_manager:
-            return reverse_lazy('gallery:artwork-list')
-        elif self.request.user.is_artist:
-            return reverse_lazy('gallery:artwork-list')
+        if self.request.user.is_manager or self.request.user.is_artist:
+            return reverse_lazy('account:dashboard')
         else:
             return reverse_lazy('gallery:artwork-list')
 
@@ -77,8 +75,6 @@ class DashboardView(LoginRequiredMixin, View):
             }
             return render(request, "account/artist_dashboard.html", context)
         elif request.user.is_manager:
-            pass
-            return render(request, "account/manager_dashboard.html", context)
+            return render(request, "account/manager_dashboard.html")
         else:
             redirect("account:apply")
-        pass
