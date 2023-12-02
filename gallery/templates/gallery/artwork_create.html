@@ -10,17 +10,17 @@
         <div class="mb-3">
             <label for="title">제목</label>
             <input type="text" class="form-control" name="title", id='title'
-                value="{{ form.title.value|default_if_none:'' }}">
+                value="{{ form.title.value|default_if_none:'' }}" placeholder="64자 이하의 텍스트를 입력하세요.">
         </div>
         <div class="mb-3">
             <label for="price">가격</label>
             <input type="text" class="form-control" name="price", id='price'
-                value="{{ form.price.value|default_if_none:'' }}">        
+                value="{{ form.price.value|default_if_none:'' }}" placeholder="0 이상의 숫자를 입력하세요.">
         </div>
         <div class="mb-3">
             <label for="size">호수</label>
             <input type="text" class="form-control" name="size" id="size"
-                value="{{ form.size.value|default_if_none:'' }}">
+                value="{{ form.size.value|default_if_none:'' }}" placeholder="1 이상 500 이하의 숫자를 입력하세요.">
         </div>
 
         <button type="submit" class="btn btn-primary">등록</button>
