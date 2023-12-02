@@ -22,7 +22,7 @@ class Artist(models.Model):
 
 class Artwork(models.Model):
     title = models.CharField(max_length=64)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='artworks')
     price = models.IntegerField()
     size = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -33,9 +33,10 @@ class Artwork(models.Model):
 
 class Exhibition(models.Model):
     title = models.CharField(max_length=64)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
-    artworks = models.ManyToManyField(Artwork, related_name='exhibitions')
+    artworks = models.ManyToManyField(Artwork, related_name='exhibitions', blank=True)
 
     def __str__(self):
         return self.title
