@@ -1,10 +1,10 @@
+from django.shortcuts import redirect, render
 from django.views import View
-from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 
-from .models import Artist, Artwork, Exhibition
-from .mixins import ArtistRequiredMixin
 from .forms import ArtworkCreateForm, ExhibitionCreateForm
+from .mixins import ArtistRequiredMixin
+from .models import Artist, Artwork, Exhibition
 
 
 class ArtistListView(ListView):

@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import User, Applyment
+from .models import Applyment, User
 
 
 class UserCreateForm(UserCreationForm):

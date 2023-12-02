@@ -1,4 +1,5 @@
-from django.core.exceptions import ValidationError 
+from django.core.exceptions import ValidationError
+
 
 def ApproveRejectValidator(approve_list, reject_list):
     if set(approve_list) & set(reject_list):

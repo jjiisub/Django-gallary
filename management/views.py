@@ -1,10 +1,10 @@
+from django.core.exceptions import ValidationError
+from django.shortcuts import redirect, render
 from django.views import View
-from django.shortcuts import render, redirect
-from django.core.exceptions import ValidationError 
 
-from account.models import User
+from account.models import Applyment, User
 from gallery.models import Artist
-from account.models import Applyment
+
 from .mixins import ManagerOnlyMixin
 from .validators import ApproveRejectValidator
 

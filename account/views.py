@@ -1,13 +1,12 @@
-from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.contrib.auth.views import LoginView, LogoutView
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import CreateView
 
+from .forms import ApplymentCreateForm, UserCreateForm
 from .models import User
-from .forms import UserCreateForm, ApplymentCreateForm
-
 
 
 class UserCreateView(CreateView):

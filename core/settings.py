@@ -1,7 +1,7 @@
 import os
-import environ
-
 from pathlib import Path
+
+import environ
 
 AUTH_USER_MODEL = 'account.User'
 

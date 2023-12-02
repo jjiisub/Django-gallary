@@ -1,6 +1,7 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+
 from .validators import PhoneValidator
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 
 class UserManager(BaseUserManager):
