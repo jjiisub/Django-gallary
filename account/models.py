@@ -51,13 +51,9 @@ class User(AbstractBaseUser):
 
 
 class Applyment(models.Model):
-    GENDER_CHOICE = [
-        ('m', '남자'),
-        ('f', '여자'),
-    ]
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=16)
-    gender = models.CharField(max_length=5, choices=GENDER_CHOICE)
+    gender = models.CharField(max_length=5)
     birth_date = models.DateField()
     email = models.EmailField()
     phone = models.CharField(validators=[PhoneValidator], max_length=15)

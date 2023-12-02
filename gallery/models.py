@@ -5,13 +5,9 @@ from .validators import ArtworkPriceValidator, ArtworkSizeValidator
 
 
 class Artist(models.Model):
-    GENDER_CHOICE = [
-        ('m', '남자'),
-        ('f', '여자'),
-    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    gender = models.CharField(max_length=5, choices=GENDER_CHOICE)
+    gender = models.CharField(max_length=5)
     birth_date = models.DateField()
     email = models.EmailField()
     phone = models.CharField(max_length=20)
