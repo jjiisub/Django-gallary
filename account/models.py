@@ -1,5 +1,5 @@
 from django.db import models
-from .validators import phone_validator
+from .validators import PhoneValidator
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 
@@ -60,7 +60,7 @@ class Applyment(models.Model):
     gender = models.CharField(max_length=5, choices=GENDER_CHOICE)
     birth_date = models.DateField()
     email = models.EmailField()
-    phone = models.CharField(validators=[phone_validator], max_length=15)
+    phone = models.CharField(validators=[PhoneValidator], max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
     is_approved = models.BooleanField(default=False)
     is_rejected = models.BooleanField(default=False)
