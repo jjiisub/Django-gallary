@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import AccessMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 
 class ArtistRequiredMixin(AccessMixin):
     def dispatch(self, request, *args, **kwargs):
