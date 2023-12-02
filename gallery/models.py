@@ -37,7 +37,7 @@ class Exhibition(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     start_date = models.DateField()
     end_date = models.DateField()
-    artworks = models.ManyToManyField(Artwork, related_name='exhibitions', blank=True)
+    artworks = models.ManyToManyField(Artwork, related_name='exhibitions')
 
     def __str__(self):
         return self.title

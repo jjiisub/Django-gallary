@@ -42,11 +42,8 @@ class ArtworkCreateView(ArtistRequiredMixin, View):
 class ExhibitionCreateView(ArtistRequiredMixin, View):
     def get(self, request):
         form = ExhibitionCreateForm(request.user)
-        artist = request.user.artist
-        artworks = artist.artworks.all()
         context = {
             'form': form,
-            'artworks': artworks,
         }
         return render(request, 'gallery/exhibition_create.html', context)
 
@@ -56,11 +53,11 @@ class ExhibitionCreateView(ArtistRequiredMixin, View):
             exhibition = form.save(commit=False)
             exhibition.artist = request.user.artist
             exhibition.save()
+            artworks = request.POST.getlist('artworks')
+            exhibition.artworks.set(artworks)
             return redirect("gallery:exhibition-create")
         else:
-            artworks = request.user.artist.artworks.all()
             context = {
                 'form': form,
-                'artworks': artworks,
             }
             return render(request, "gallery/exhibition_create.html", context)
