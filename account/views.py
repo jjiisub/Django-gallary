@@ -62,3 +62,23 @@ class ApplymentCreateView(LoginRequiredMixin, View):
             'form': form,
             }
             return render(request, "account/applyment.html", context)
+
+
+class DashboardView(LoginRequiredMixin, View):
+    def get(self, request):
+        if request.user.is_artist:
+            artist = request.user.artist
+            artworks = artist.artworks.all()
+            exhibitions = artist.exhibitions.all()
+            context = {
+                'artist': artist,
+                'artworks': artworks,
+                'exhibitions': exhibitions,
+            }
+            return render(request, "account/artist_dashboard.html", context)
+        elif request.user.is_manager:
+            pass
+            return render(request, "account/manager_dashboard.html", context)
+        else:
+            redirect("account:apply")
+        pass
