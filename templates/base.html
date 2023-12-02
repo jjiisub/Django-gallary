@@ -29,7 +29,7 @@
               <span class="navbar-text"> | </span>
               {% if user.is_artist %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'gallery:artist-list' %}">대시보드</a>
+                <a class="nav-link" href="{% url 'account:dashboard' %}">대시보드</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'gallery:artwork-create' %}">작품 등록</a>
