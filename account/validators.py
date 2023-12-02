@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 import re
 
 
-def phone_validator(value):
+def PhoneValidator(value):
 
     pattern = re.compile(r'^\d{3}-\d{4}-\d{4}$')
 
