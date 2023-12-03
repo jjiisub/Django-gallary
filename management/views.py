@@ -1,12 +1,12 @@
-from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
+from django.db.models import Count, Avg, Q
+from django.views.generic import ListView
 from django.views import View
 
 from core.validators import ApproveRejectValidator
 from core.mixins import ManagerOnlyMixin
 from account.models import Applyment, User
 from gallery.models import Artist
-
 
 
 class ApplymentManageView(ManagerOnlyMixin, View):
@@ -44,3 +44,18 @@ class ApplymentManageView(ManagerOnlyMixin, View):
             )
             new_artist.save()
         return redirect("management:apply")
+
+
+class ArtistStatisticsView(ManagerOnlyMixin, ListView):
+    model = Artist
+    ordering = '-created_at'
+    context_object_name = 'artists'
+    template_name = "management/statistics.html"
+
+    def get_queryset(self):
+        queryset = Artist.objects.annotate(
+            artwork_count=Count('artworks'),
+            artwork_count_lte_size_100=Count('artworks', filter=Q(artworks__size__lte=100)),
+            artwork_avg_price=Avg('artworks__price')
+        )
+        return queryset

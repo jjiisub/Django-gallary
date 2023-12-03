@@ -3,6 +3,6 @@
 {% block content %}
 <div class="d-grid gap-2 col-6 mx-auto mt-5">
   <a class="btn btn-outline-secondary" href="{% url "management:apply" %}">작가 등록 관리</a>
-  <a class="btn btn-outline-secondary" href="#">작가 통계</a>
+  <a class="btn btn-outline-secondary" href="{% url "management:statistics" %}">작가 통계</a>
 </div>
-{% endblock  %}
+{% endblock %}
