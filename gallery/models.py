@@ -2,7 +2,7 @@ from django.db import models
 
 from account.models import User
 
-from core.validators import ArtworkPriceValidator, ArtworkSizeValidator
+from core.validators import DateValidator, ArtworkPriceValidator, ArtworkSizeValidator
 
 
 class Artist(models.Model):
@@ -32,8 +32,8 @@ class Artwork(models.Model):
 class Exhibition(models.Model):
     title = models.CharField(max_length=64)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, related_name='exhibitions')
-    start_date = models.DateField()
-    end_date = models.DateField()
+    start_date = models.DateField(validators=[DateValidator])
+    end_date = models.DateField(validators=[DateValidator])
     artworks = models.ManyToManyField(Artwork, related_name='exhibitions')
 
     def __str__(self):

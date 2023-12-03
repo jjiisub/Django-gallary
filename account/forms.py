@@ -11,6 +11,8 @@ class UserCreateForm(UserCreationForm):
 
 
 class ApplymentCreateForm(forms.ModelForm):
+    birth_date = forms.CharField(max_length=15)
+
     class Meta:
         model = Applyment
         fields = ['name', 'gender', 'birth_date', 'email', 'phone']
