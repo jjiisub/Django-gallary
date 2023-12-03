@@ -23,8 +23,30 @@
                 value="{{ form.size.value|default_if_none:'' }}" placeholder="1 이상 500 이하의 숫자를 입력하세요.">
         </div>
 
-        <button type="submit" class="btn btn-primary">등록</button>
+        <button id="btn-submit" type="submit" class="btn btn-primary">등록</button>
     </form>
 </div>
 
+<script>
+    const el = document.getElementById('price');
+    const btn = document.getElementById('btn-submit');
+
+    function ChangeToNumber(value) {
+        return Number(value.replace(/\,/g, ''));
+    };
+
+    el.addEventListener('input', function() {
+    const price = el.value;
+    const price_num = ChangeToNumber(price)
+    if (isNaN(price_num)==true || price_num==0){
+        el.value='';
+    } else {
+        el.value=price_num.toLocaleString();
+    };
+    });
+
+    btn.addEventListener('click', function() {
+        el.value = ChangeToNumber(el.value);
+    });
+</script>
 {% endblock %}
