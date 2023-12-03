@@ -70,7 +70,7 @@ class ApplymentManageView(ManagerOnlyMixin, View):
         ...
 ```
 
-> ### Validation
+> ### 기능 구현
 
 #### Form Field Validation
 
@@ -141,6 +141,45 @@ class ApplymentManageView(ManagerOnlyMixin, View):
                 'errors': '승인과 반려를 동시에 선택할 수 없습니다.',
             }
             return render(request, "management/applyment.html", context)
+        ...
+```
+
+#### 전시 등록 페이지 작품 목록 form
+
+전시 등록 페이지로 GET 요청 시 form에 request.user를 입력받아 해당 작가의 작품만 출력되도록 구현했습니다. 이후 선택된 작품 목록을 getlist로 가져와 해당 작품들을 Exhibition 객체에 저장했습니다.
+
+```python
+## gallery/forms.py
+class ExhibitionCreateForm(forms.ModelForm):
+    artworks = forms.ModelMultipleChoiceField(
+        queryset=None,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={'class':'form-check-input me-1'}
+        )
+    )
+
+    def __init__(self, user, *args, **kwargs):
+        super(ExhibitionCreateForm, self).__init__(*args, **kwargs)
+        self.fields['artworks'].queryset = Artwork.objects.filter(artist=user.artist)
+    ...
+
+## gallery/views.py
+class ExhibitionCreateView(ArtistRequiredMixin, View):
+    def get(self, request):
+        form = ExhibitionCreateForm(request.user)
+        context = {
+            'form': form,
+        }
+        return render(request, 'gallery/exhibition_create.html', context)
+
+    def post(self, request):
+        form = ExhibitionCreateForm(request.user, request.POST)
+        if form.is_valid():
+            exhibition = form.save(commit=False)
+            exhibition.artist = request.user.artist
+            exhibition.save()
+            artworks = request.POST.getlist('artworks')
+            exhibition.artworks.set(artworks)
         ...
 ```
 
