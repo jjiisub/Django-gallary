@@ -1,6 +1,9 @@
+import csv
+
 from django.shortcuts import redirect, render
 from django.db.models import Count, Avg, Q
 from django.views.generic import ListView
+from django.http import HttpResponse
 from django.views import View
 
 from core.validators import ApproveRejectValidator
@@ -62,6 +65,21 @@ class ApplymentSearchView(ListView):
         elif option in ['gender', 'birth_date', 'phone']:
             queryset = Artist.objects.filter(**{option: keyword})
         return queryset
+
+
+class ApplymentDownloadView(View):
+    def get(self, request):
+        applyments = Applyment.objects.all().order_by('-created_at')
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="applyments.csv"'
+        writer = csv.writer(response)
+        writer.writerow(['이름', '성별', '생년월일','이메일','연락처','신청 일시','승인', '반려'])
+        for applyment in applyments:
+            gender_value = '남성' if applyment.gender=='m' else '여성'
+            is_approved_value = 'v' if applyment.is_approved else ''
+            is_rejected_value = 'v' if applyment.is_rejected else ''
+            writer.writerow([applyment.name, gender_value, applyment.birth_date, applyment.email, applyment.phone, applyment.created_at, is_approved_value, is_rejected_value])
+        return response
 
 
 class ArtistStatisticsView(ManagerOnlyMixin, ListView):
