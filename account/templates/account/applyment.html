@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>작가 등록 신청 페이지</h2>
 
-<div class="container my-3">
+<div class="container mt-5 my-3">
+    <h2>작가 등록 신청 페이지</h2>
     <form method="post" action="{% url 'account:apply' %}">
         {% csrf_token %}
         {% include "form_errors.html" %}
@@ -36,7 +36,7 @@
                 value="{{ form.phone.value|default_if_none:'' }}" placeholder="000-0000-0000">
         </div>
 
-        <button type="submit" class="btn btn-primary">신청</button>
+        <button type="submit" class="btn btn-secondary">신청</button>
     </form>
 </div>
 
