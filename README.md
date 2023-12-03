@@ -207,6 +207,16 @@ class ManagerOnlyMixin(AccessMixin):
         elif not request.user.is_manager:
             return redirect('gallery:artist-list')
         ...
+
+
+## gallery/views.py
+class ExhibitionCreateView(ArtistRequiredMixin, View):
+    ...
+
+
+## management/views.py
+class ApplymentManageView(ManagerOnlyMixin, View):
+    ...
 ```
 
 > ### Errors
