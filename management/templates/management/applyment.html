@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if applyments %}
-<div class="container">
+<div class="container mt-5">
     <form method="post" action="{% url 'management:apply' %}">
         {% csrf_token %}
         {% include "approve_reject_errors.html" %}
@@ -24,7 +24,11 @@
                 {% for applyment in applyments %}
                 <tr>
                     <td>{{ applyment.name }}</td>
-                    <td>{{ applyment.gender }}</td>
+                    {% if applyment.gender == 'm' %}
+                    <td>남자</td>
+                    {% else %}
+                    <td>여자</td>
+                    {% endif %}
                     <td>{{ applyment.birth_date }}</td>
                     <td>{{ applyment.email }}</td>
                     <td>{{ applyment.phone }}</td>

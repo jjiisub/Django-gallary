@@ -17,7 +17,11 @@
     <tbody>
         <tr>
             <td>{{ artist.name }}</td>
-            <td>{{ artist.gender }}</td>
+            {% if artist.gender == 'm' %}
+            <td>남자</td>
+            {% else %}
+            <td>여자</td>
+            {% endif %}
             <td>{{ artist.birth_date }}</td>
             <td>{{ artist.email }}</td>
             <td>{{ artist.phone }}</td>
@@ -36,7 +40,6 @@
         <thead class="thead">
             <tr>
                 <th>제목</th>
-                <th>작가</th>
                 <th>가격</th>
                 <th>호수</th>
                 <th>등록일</th>
@@ -46,7 +49,6 @@
             {% for artwork in artworks %}
             <tr>
                 <td>{{ artwork.title }}</td>
-                <td>{{ artwork.artist }}</td>
                 <td>{{ artwork.price }}</td>
                 <td>{{ artwork.size }}</td>
                 <td>{{ artwork.created_at }}</td>
@@ -55,7 +57,7 @@
         </tbody>
     </table>
     {% else %}
-    <p class="card-title">아직 등록된 작품이 없습니다.</p>
+    <p class="card-title">등록된 작품이 없습니다.</p>
     {% endif %}
     </div>
 </div>
@@ -90,7 +92,7 @@
         </tbody>
     </table>
     {% else %}
-    <p class="card-title">아직 등록된 전시가 없습니다.</p>
+    <p class="card-title">등록된 전시가 없습니다.</p>
     {% endif %}
   </div>
 </div>
