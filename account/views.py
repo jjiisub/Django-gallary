@@ -40,7 +40,7 @@ class UserLogoutView(LogoutView):
 class ApplymentCreateView(LoginRequiredMixin, View):
     def get(self, request):
         if request.user.is_artist:
-            return redirect("gallery:artwork-list")
+            return render(request, "401.html")
         form = ApplymentCreateForm
         context = {
             'form': form,

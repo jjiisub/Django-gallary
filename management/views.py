@@ -49,7 +49,7 @@ class ApplymentManageView(ManagerOnlyMixin, View):
         return redirect("management:apply")
 
 
-class ApplymentSearchView(ListView):
+class ApplymentSearchView(ManagerOnlyMixin, ListView):
     model = Applyment
     context_object_name = 'applyments'
     template_name = "management/applyment.html"
@@ -67,7 +67,7 @@ class ApplymentSearchView(ListView):
         return queryset
 
 
-class ApplymentDownloadView(View):
+class ApplymentDownloadView(ManagerOnlyMixin, View):
     def get(self, request):
         applyments = Applyment.objects.all().order_by('-created_at')
         response = HttpResponse(content_type='text/csv')
