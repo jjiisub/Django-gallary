@@ -7,6 +7,11 @@ from core.mixins import ArtistRequiredMixin
 from .models import Artist, Artwork
 
 
+class IndexView(View):
+    def get(self, request):
+        return render(request, "gallery/index.html")
+
+
 class ArtistListView(ListView):
     model = Artist
     ordering = '-created_at'

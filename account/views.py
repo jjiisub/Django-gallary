@@ -53,7 +53,7 @@ class ApplymentCreateView(LoginRequiredMixin, View):
             applyment = form.save(commit=False)
             applyment.user = request.user
             applyment.save()
-            return redirect("gallery:artwork-list")
+            return redirect("gallery:index")
         else:
             context = {
             'form': form,
