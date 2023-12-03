@@ -25,6 +25,33 @@
     </tbody>
 </table>
 {% else %}
-<p>작성된 게시글이 없습니다.</p>
+<p>게시글이 없습니다.</p>
 {% endif %}
+
+<form class="d-flex" role="search" action="{% url "gallery:artwork-search" %}">
+    <select class="form-select" name="search-option" id="search-option">
+        <option value="title">제목</option>
+        <option value="price">가격</option>
+        <option value="size">호수</option>
+    </select>
+    <select class="form-select" name="search-option-compare" id="search-option-compare" disabled>
+        <option value="more">이상</option>
+        <option value="less">이하</option>
+    </select>
+    <input class="form-control" type="search" placeholder="검색 키워드를 입력하세요" name="search-keyword">
+    <input type="submit" value="검색" class="btn btn-outline-success">
+</form>
+
+<script>
+    const searchOptionEl = document.getElementById('search-option');
+    const searchOptionCompareEl = document.getElementById('search-option-compare');
+    searchOptionEl.addEventListener('change', function() {
+        const searchOptionValue = searchOptionEl.options[searchOptionEl.selectedIndex].value;
+        if (searchOptionValue=="title"){
+            searchOptionCompareEl.setAttribute("disabled", true);
+        } else {
+            searchOptionCompareEl.removeAttribute("disabled");
+        };
+    });
+</script>
 {% endblock  %}
