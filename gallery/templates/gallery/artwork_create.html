@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>작품 등록 페이지</h2>
 
-<div class="container my-3">
+<div class="container mt-5 my-3">
+    <h2>작품 등록 페이지</h2>
     <form method="post" action="{% url 'gallery:artwork-create' %}">
         {% csrf_token %}
         {% include "form_errors.html" %}
