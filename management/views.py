@@ -46,6 +46,24 @@ class ApplymentManageView(ManagerOnlyMixin, View):
         return redirect("management:apply")
 
 
+class ApplymentSearchView(ListView):
+    model = Applyment
+    context_object_name = 'applyments'
+    template_name = "management/applyment.html"
+
+    def get_queryset(self):
+        option = self.request.GET.get("search-option")
+        keyword = self.request.GET.get("search-keyword")
+        queryset = []
+        if not keyword:
+            return queryset
+        if option in ['name', 'email']:
+            queryset = Artist.objects.filter(**{f'{option}__icontains': keyword})
+        elif option in ['gender', 'birth_date', 'phone']:
+            queryset = Artist.objects.filter(**{option: keyword})
+        return queryset
+
+
 class ArtistStatisticsView(ManagerOnlyMixin, ListView):
     model = Artist
     ordering = '-created_at'
