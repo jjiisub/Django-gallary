@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic.list import ListView
 
 from .forms import ArtworkCreateForm, ExhibitionCreateForm
-from .mixins import ArtistRequiredMixin
+from core.mixins import ArtistRequiredMixin
 from .models import Artist, Artwork, Exhibition
 
 
