@@ -2,11 +2,11 @@ from django.core.exceptions import ValidationError
 from django.shortcuts import redirect, render
 from django.views import View
 
+from core.validators import ApproveRejectValidator
+from core.mixins import ManagerOnlyMixin
 from account.models import Applyment, User
 from gallery.models import Artist
 
-from .mixins import ManagerOnlyMixin
-from .validators import ApproveRejectValidator
 
 
 class ApplymentManageView(ManagerOnlyMixin, View):

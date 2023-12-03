@@ -1,7 +1,7 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 
-from .validators import PhoneValidator
+from core.validators import DateValidator, PhoneValidator
 
 
 class UserManager(BaseUserManager):
@@ -55,7 +55,7 @@ class Applyment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=16)
     gender = models.CharField(max_length=5)
-    birth_date = models.DateField()
+    birth_date = models.DateField(validators=[DateValidator])
     email = models.EmailField()
     phone = models.CharField(validators=[PhoneValidator], max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
