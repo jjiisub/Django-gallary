@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% if artworks %}
 <table class="table table-hover text-center mt-5">
     <thead class="thead">
         <tr>
@@ -13,6 +12,7 @@
         </tr>
     </thead>
     <tbody>
+        {% if artworks %}
         {% for artwork in artworks %}
         <tr>
             <td>{{ artwork.title }}</td>
@@ -22,11 +22,13 @@
             <td>{{ artwork.created_at }}</td>
         </tr>
         {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="5">출력할 작품 정보가 없습니다.</td>
+        </tr>
+        {% endif %}
     </tbody>
 </table>
-{% else %}
-<p>게시글이 없습니다.</p>
-{% endif %}
 
 <form class="d-flex" role="search" action="{% url "gallery:artwork-search" %}">
     <select class="form-select" name="search-option" id="search-option">

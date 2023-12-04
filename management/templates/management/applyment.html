@@ -2,7 +2,6 @@
 
 {% block content %}
 
-{% if applyments %}
 <div class="container mt-5">
     <form method="post" action="{% url 'management:apply' %}">
         {% csrf_token %}
@@ -21,6 +20,7 @@
                 </tr>
             </thead>
             <tbody>
+                {% if applyments %}
                 {% for applyment in applyments %}
                 <tr>
                     <td>{{ applyment.name }}</td>
@@ -45,15 +45,18 @@
                     {% endif %}
                 </tr>
                 {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="8">출력할 작가신청 정보가 없습니다.</td>
+                </tr>
+                {% endif %}
             </tbody>
         </table>
         <button type="submit" class="btn btn-outline-secondary">적용</button>
         <a href="{% url "management:apply-download" %}" type="submit" class="btn btn-outline-secondary">다운로드</a>
     </form>
 </div>
-{% else %}
-<p class="mt-5">작가 등록 신청 내역이 없습니다.</p>
-{% endif %}
+
 <form class="d-flex mt-5" role="search" action="{% url "management:apply-search" %}">
     <select class="form-select" name="search-option" id="search-option">
         <option value="name">이름</option>
