@@ -11,12 +11,67 @@
 
 ### Test Account
 
-| Username |   Password   |    Authority     |
-| :------: | :----------: | :--------------: |
-|  admin   |    admin     |      Admin       |
-| manager  | adminadmin11 |     Manager      |
-|  user1   |  useruser11  |      Artist      |
-|  user4   |  useruser44  | User(not Artist) |
+<table>
+<tr>
+<th align="center">
+<img width="500px" height="1">
+<p> 
+EXAMPLE TEXT
+</p>
+</th>
+<th align="center">
+<img width="500px" height="1">
+<p> 
+<small>
+EXAMPLE TEXT
+</small>
+</p>
+</th>
+</tr>
+<tr>
+<td>
+
+```jsonc
+{
+  "foo": [
+    {
+      "bar": "hello world"
+    }
+  ]
+}
+```
+
+</td>
+<td>
+```jsonc
+{
+  "foo": [
+    {
+      "bar": "hello world"
+    }
+  ]
+}
+```
+  
+</td>
+</tr>
+<tr>
+<td align="center">
+Column 1
+</td>
+<td align="center">
+Column 2
+</td>
+</tr>
+</table>
+
+|     Username     |     Password     |    Authority     |
+| :--------------: | :--------------: | :--------------: |
+|      admin       |      admin       |      Admin       |
+|     manager      |   adminadmin11   |     Manager      |
+|      user1       |    useruser11    |      Artist      |
+|      user4       |    useruser44    | User(not Artist) |
+| <img width=300/> | <img width=300/> | <img width=300/> |
 
 # Installation
 
@@ -62,24 +117,24 @@ Schema Diagram
 
 ### Endpoints
 
-|      App      |            Path            |         Description          |
-| :-----------: | :------------------------: | :--------------------------: |
-|   `account`   |      account/signup/       |           회원가입           |
-|               |       account/login/       |            로그인            |
-|               |      account/logout/       |           로그아웃           |
-|               |       account/apply/       |         작가등록신청         |
-|               |     account/dashboard/     |    대시보드(작가/관리자)     |
-|   `gallery`   |             /              |          메인페이지          |
-|               |        artist/list/        |        작가 목록조회         |
-|               |       artist/search/       |          작가 검색           |
-|               |       artwork/list/        |        작품 목록조회         |
-|               |      artwork/search/       |          작품 검색           |
-|               |      artwork/create/       |          작품 등록           |
-|               |     exhibition/create/     |          전시 등록           |
-| `management/` |     management/apply/      |       작가등록신청관리       |
-|               |  management/apply/search/  |    작가등록신청관리 검색     |
-|               | management/apply/download/ | 작가등록신청관리 CSV다운로드 |
-|               |   management/statistics/   |          작가 통게           |
+|     App      |            Path            |         Description          |
+| :----------: | :------------------------: | :--------------------------: |
+|  `account`   |      account/signup/       |           회원가입           |
+|              |       account/login/       |            로그인            |
+|              |      account/logout/       |           로그아웃           |
+|              |       account/apply/       |         작가등록신청         |
+|              |     account/dashboard/     |    대시보드(작가/관리자)     |
+|  `gallery`   |             /              |          메인페이지          |
+|              |        artist/list/        |        작가 목록조회         |
+|              |       artist/search/       |          작가 검색           |
+|              |       artwork/list/        |        작품 목록조회         |
+|              |      artwork/search/       |          작품 검색           |
+|              |      artwork/create/       |          작품 등록           |
+|              |     exhibition/create/     |          전시 등록           |
+| `management` |     management/apply/      |       작가등록신청관리       |
+|              |  management/apply/search/  |    작가등록신청관리 검색     |
+|              | management/apply/download/ | 작가등록신청관리 CSV다운로드 |
+|              |   management/statistics/   |          작가 통게           |
 
 # Features
 
