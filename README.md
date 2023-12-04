@@ -11,66 +11,12 @@
 
 ### Test Account
 
-<table>
-<tr>
-<th align="center">
-<img width="500px" height="1">
-<p> 
-EXAMPLE TEXT
-</p>
-</th>
-<th align="center">
-<img width="500px" height="1">
-<p> 
-<small>
-EXAMPLE TEXT
-</small>
-</p>
-</th>
-</tr>
-<tr>
-<td>
-
-```jsonc
-{
-  "foo": [
-    {
-      "bar": "hello world"
-    }
-  ]
-}
-```
-
-</td>
-<td>
-```jsonc
-{
-  "foo": [
-    {
-      "bar": "hello world"
-    }
-  ]
-}
-```
-  
-</td>
-</tr>
-<tr>
-<td align="center">
-Column 1
-</td>
-<td align="center">
-Column 2
-</td>
-</tr>
-</table>
-
-|        Username        |          Password           |            Authority             |
-| :--------------------: | :-------------------------: | :------------------------------: |
-|         admin          |            admin            |              Admin               |
-|        manager         |        adminadmin11         |             Manager              |
-|         user1          |         useruser11          |              Artist              |
-| user4 <img width=300/> | useruser44 <img width=300/> | User(not Artist)<img width=300/> |
+| Username <img width=300/> | Password <img width=300/> | Authority <img width=300/> |
+| :-----------------------: | :-----------------------: | :------------------------: |
+|           admin           |           admin           |           Admin            |
+|          manager          |       adminadmin11        |          Manager           |
+|           user1           |        useruser11         |           Artist           |
+|           user4           |        useruser44         |      User(not Artist)      |
 
 # Installation
 
