@@ -24,7 +24,7 @@ class UserLoginView(LoginView):
         if self.request.user.is_manager or self.request.user.is_artist:
             return reverse_lazy('account:dashboard')
         else:
-            return reverse_lazy('gallery:artwork-list')
+            return reverse_lazy('gallery:index')
 
     def form_valid(self, form):
         response = super().form_valid(form)
