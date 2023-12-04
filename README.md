@@ -1,6 +1,4 @@
-# Django-gallery
-
-## Introduction
+# Introduction
 
 ### Environment
 
@@ -13,15 +11,14 @@
 
 ### Test Account
 
-| Username |   Password   |   Description    |
+| Username |   Password   |    Authority     |
 | :------: | :----------: | :--------------: |
 |  admin   |    admin     |      Admin       |
 | manager  | adminadmin11 |     Manager      |
 |  user1   |  useruser11  |      Artist      |
-|  user2   |  useruser22  |      Artist      |
 |  user4   |  useruser44  | User(not Artist) |
 
-## Installation
+# Installation
 
 ### Download
 
@@ -35,7 +32,6 @@ $ pip install -r requirements.txt
 
 ```shell
 ## .env
-
 SECRET_KEY="YourSecretKey"
 DEBUG=False
 SERVER_IP='YourServerIP'
@@ -54,7 +50,7 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-## Structure
+# Structure
 
 ### Database Schema
 
@@ -83,23 +79,17 @@ Schema Diagram
 | `management/` |     management/apply/      |       작가등록신청관리       |
 |               |  management/apply/search/  |    작가등록신청관리 검색     |
 |               | management/apply/download/ | 작가등록신청관리 CSV다운로드 |
-|               |   management/statistics    |          작가 통게           |
+|               |   management/statistics/   |          작가 통게           |
 
-## Features
+# Features
 
 ### 기능 구현
 
 - #### [작품 등록 가격 콤마 표시](https://github.com/jjiisub/Django-gallery/wiki/작품등록-가격-콤마표시)
 
-- #### [전시등록 작품목록 form](https://github.com/jjiisub/Django-gallery/wiki/전시등록-작품목록-form)
-
-- #### [작가/작품 검색](https://github.com/jjiisub/Django-gallery/wiki/작가-작품-검색)
-
-- #### [작가등록신청관리 검색](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-검색)
+- #### [전시등록 시 작품목록출력](https://github.com/jjiisub/Django-gallery/wiki/전시등록-작품목록-form)
 
 - #### [작가등록신청관리 일괄처리](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-일괄처리)
-
-- #### [작가등록신청관리 CSV 다운로드](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-CSV-다운로드)
 
 - #### [작가 통계](https://github.com/jjiisub/Django-gallery/wiki/작가-통계)
 
@@ -113,8 +103,16 @@ Schema Diagram
 
 - #### [유저 권한 설정 mixin](https://github.com/jjiisub/Django-gallery/wiki/유저-권한-설정-mixin)
 
+### 추가요구사항 구현
+
+- #### [작가/작품 검색](https://github.com/jjiisub/Django-gallery/wiki/작가-작품-검색)
+
+- #### [작가등록신청관리 검색](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-검색)
+
+- #### [작가등록신청관리 CSV 다운로드](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-CSV-다운로드)
+
 ### Error Pages
 
 - #### [401_NOT_AUTHORIZED](https://github.com/jjiisub/Django-gallery/wiki/401_NOT_AUTHORIZED)
 
-- #### [404_NOT_FOUND]()
+- #### [404_NOT_FOUND](https://github.com/jjiisub/Django-gallery/wiki/404_NOT_FOUND)
