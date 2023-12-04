@@ -62,114 +62,11 @@ ScreenShots
 
 ### 기능 구현
 
-- #### 작품 등록 가격 콤마 표시
-- #### [작품 등록 가격 콤마 표시](https://github.com/jjiisub/Django-gallery.wiki.git)
+- #### [작품 등록 가격 콤마 표시](https://github.com/jjiisub/Django-gallery/wiki/작품등록-가격-콤마표시)
 
-작품 등록 페이지에서 가격을 입력할 때, 천 단위마다 콤마를 출력하는 기능을 JavaScript로 구현했습니다. 가격 element에 입력이 될 때마다 입력값이 숫자 형식인지 확인하고, 천 단위마다 콤마를 삽입합니다. 제출 버튼을 누르면 콤마를 제거한 값을 form으로 넘겨줍니다.
+- #### [전시등록 작품목록 form](https://github.com/jjiisub/Django-gallery/wiki/전시등록-작품목록-form)
 
-```js
-// gallery/templates/gallery/artwork_create.html
-const el = document.getElementById("price");
-const btn = document.getElementById("btn-submit");
-function ChangeToNumber(value) {
-  return Number(value.replace(/\,/g, ""));
-}
-
-el.addEventListener("input", function () {
-  const price = el.value;
-  const price_num = ChangeToNumber(price);
-  if (isNaN(price_num) == true || price_num == 0) {
-    el.value = "";
-  } else {
-    el.value = price_num.toLocaleString();
-  }
-});
-
-btn.addEventListener("click", function () {
-  el.value = ChangeToNumber(el.value);
-});
-```
-
-- #### 작가, 작품 검색 기능
-
-작가 목록 페이지에서는 이름, 성별, 생년월일, 이메일, 연락처를 기준으로 키워드를 입력하여 검색할 수 있습니다.
-
-이름과 이메일은 django orm의 icontains를 이용하여 검색 키워드를 포함하는 결과를 출력합니다. 성별, 생년월일, 연락처는 키워드와 일치하는 결과를 출력합니다. 이때 검색 기준에 따라 placeholder를 변경하여 검색 형식을 알 수 있도록 구현했습니다.
-
-```python
-## gallery/views.py
-class ArtistSearchView(ListView):
-    ...
-    def get_queryset(self):
-        option = self.request.GET.get("search-option")
-        keyword = self.request.GET.get("search-keyword")
-        queryset = []
-        if not keyword:
-            return queryset
-        if option in ['name', 'email']:
-            queryset = Artist.objects.filter(**{f'{option}__icontains': keyword})
-        elif option in ['gender', 'birth_date', 'phone']:
-            queryset = Artist.objects.filter(**{option: keyword})
-        return queryset
-```
-
-```js
-// gallery/templates/gallery/artwork_list.html
-const searchOptionEl = document.getElementById("search-option");
-const searchKeywordEl = document.getElementById("search-keyword");
-searchOptionEl.addEventListener("change", function () {
-  const searchOptionValue = searchOptionEl.options[searchOptionEl.selectedIndex].value;
-  if (searchOptionValue == "gender") {
-    searchKeywordEl.setAttribute("placeholder", "m(남자) 또는 f(여자)");
-  } else if (searchOptionValue == "birth_date") {
-    searchKeywordEl.setAttribute("placeholder", "YYYY-MM-DD");
-  } else if (searchOptionValue == "phone") {
-    searchKeywordEl.setAttribute("placeholder", "000-0000-0000");
-  } else {
-    searchKeywordEl.setAttribute("placeholder", "검색 키워드를 입력하세요");
-  }
-});
-```
-
-작품 목록 페이지에서는 제목, 가격, 호수를 기준으로 키워드를 입력하여 검색할 수 있습니다.
-
-검색 화면에서 가격 또는 호수를 선택하면 비교기준(이상, 이하)를 정해 입력값과 비교하여 검색할 수 있습니다. 선택한 검색기준, 비교기준, 키워드를 GET query string으로 전달받습니다. 유저가 임의의 값을 전달하는 경우를 대비하여 try/except로 예외처리하였습니다.
-
-검색 화면에서 제목을 선택하면 비교기준 선택이 비활성화됩니다. 제목은 django orm의 icontains를 이용하여 키워드를 포함하는 결과를 출력합니다.
-
-```python
-## gallery.views.py
-class ArtworkSearchView(ListView):
-    ...
-    def get_queryset(self):
-        option = self.request.GET.get("search-option")
-        keyword = self.request.GET.get("search-keyword")
-        queryset = []
-        if option=='title':
-            queryset = Artwork.objects.filter(title__icontains=keyword)
-        elif option=='price' or option=='size':
-            comp = self.request.GET.get("search-option-compare")
-            option_compare = '__gte' if comp=="more" else '__lte'
-            try:
-                queryset = Artwork.objects.filter(**{f'{option}{option_compare}': keyword})
-            except:
-                pass
-        return queryset
-```
-
-```js
-// gallery/templates/gallery/artwork_list.html
-const searchOptionEl = document.getElementById("search-option");
-const searchOptionCompareEl = document.getElementById("search-option-compare");
-searchOptionEl.addEventListener("change", function () {
-  const searchOptionValue = searchOptionEl.options[searchOptionEl.selectedIndex].value;
-  if (searchOptionValue == "title") {
-    searchOptionCompareEl.setAttribute("disabled", true);
-  } else {
-    searchOptionCompareEl.removeAttribute("disabled");
-  }
-});
-```
+- #### [작가/작품 검색](https://github.com/jjiisub/Django-gallery/wiki/작가-작품-검색)
 
 - #### 작가등록신청 검색
 
@@ -302,45 +199,6 @@ class ApplymentManageView(ManagerOnlyMixin, View):
                 'errors': '승인과 반려를 동시에 선택할 수 없습니다.',
             }
             return render(request, "management/applyment.html", context)
-        ...
-```
-
-- #### 전시 등록 페이지 작품 목록 form
-
-전시 등록 페이지로 GET 요청 시 form에 request.user를 입력받아 해당 작가의 작품만 출력되도록 구현했습니다. 이후 선택된 작품 목록을 getlist로 가져와 해당 작품들을 Exhibition 객체에 저장했습니다.
-
-```python
-## gallery/forms.py
-class ExhibitionCreateForm(forms.ModelForm):
-    artworks = forms.ModelMultipleChoiceField(
-        queryset=None,
-        widget=forms.CheckboxSelectMultiple(
-            attrs={'class':'form-check-input me-1'}
-        )
-    )
-
-    def __init__(self, user, *args, **kwargs):
-        super(ExhibitionCreateForm, self).__init__(*args, **kwargs)
-        self.fields['artworks'].queryset = Artwork.objects.filter(artist=user.artist)
-    ...
-
-## gallery/views.py
-class ExhibitionCreateView(ArtistRequiredMixin, View):
-    def get(self, request):
-        form = ExhibitionCreateForm(request.user)
-        context = {
-            'form': form,
-        }
-        return render(request, 'gallery/exhibition_create.html', context)
-
-    def post(self, request):
-        form = ExhibitionCreateForm(request.user, request.POST)
-        if form.is_valid():
-            exhibition = form.save(commit=False)
-            exhibition.artist = request.user.artist
-            exhibition.save()
-            artworks = request.POST.getlist('artworks')
-            exhibition.artworks.set(artworks)
         ...
 ```
 
