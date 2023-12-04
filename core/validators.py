@@ -1,5 +1,4 @@
 import re
-# import datetime
 
 from django.core.exceptions import ValidationError
 
