@@ -15,14 +15,15 @@ class ExhibitionCreateForm(forms.ModelForm):
     artworks = forms.ModelMultipleChoiceField(
         queryset=None,
         widget=forms.CheckboxSelectMultiple(
-            attrs={'class':'form-check-input me-1'}
+            attrs={'class': 'form-check-input me-1'}
         )
     )
-    
+
     def __init__(self, user, *args, **kwargs):
         super(ExhibitionCreateForm, self).__init__(*args, **kwargs)
-        self.fields['artworks'].queryset = Artwork.objects.filter(artist=user.artist)
-    
+        self.fields['artworks'].queryset = Artwork.objects.filter(
+            artist=user.artist)
+
     class Meta:
         model = Exhibition
         fields = ['title', 'start_date', 'end_date', 'artworks']

@@ -17,11 +17,12 @@ class ArtistListView(ListView):
     ordering = '-created_at'
     context_object_name = 'artists'
 
+
 class ArtistSearchView(ListView):
     model = Artist
     context_object_name = 'artists'
     template_name = "gallery/artist_list.html"
-    
+
     def get_queryset(self):
         option = self.request.GET.get("search-option")
         keyword = self.request.GET.get("search-keyword")
@@ -29,7 +30,8 @@ class ArtistSearchView(ListView):
         if not keyword:
             return queryset
         if option in ['name', 'email']:
-            queryset = Artist.objects.filter(**{f'{option}__icontains': keyword})
+            queryset = Artist.objects.filter(
+                **{f'{option}__icontains': keyword})
         elif option in ['gender', 'birth_date', 'phone']:
             queryset = Artist.objects.filter(**{option: keyword})
         return queryset
@@ -45,18 +47,19 @@ class ArtworkSearchView(ListView):
     model = Artwork
     context_object_name = 'artworks'
     template_name = "gallery/artwork_list.html"
-    
+
     def get_queryset(self):
         option = self.request.GET.get("search-option")
         keyword = self.request.GET.get("search-keyword")
         queryset = []
-        if option=='title':
+        if option == 'title':
             queryset = Artwork.objects.filter(title__icontains=keyword)
-        elif option=='price' or option=='size':
+        elif option == 'price' or option == 'size':
             comp = self.request.GET.get("search-option-compare")
-            option_compare = '__gte' if comp=="more" else '__lte'
+            option_compare = '__gte' if comp == "more" else '__lte'
             try:
-                queryset = Artwork.objects.filter(**{f'{option}{option_compare}': keyword})
+                queryset = Artwork.objects.filter(
+                    **{f'{option}{option_compare}': keyword})
             except:
                 pass
         return queryset
@@ -69,7 +72,7 @@ class ArtworkCreateView(ArtistRequiredMixin, View):
             'form': form,
         }
         return render(request, "gallery/artwork_create.html", context)
-    
+
     def post(self, request):
         form = ArtworkCreateForm(request.POST)
         if form.is_valid():
