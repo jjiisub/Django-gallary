@@ -1,52 +1,44 @@
 {% extends "base.html" %}
-
 {% block content %}
 
 <div class="container mt-5 my-3">
-    <h2>작품 등록 페이지</h2>
-    <form method="post" action="{% url 'gallery:artwork-create' %}">
-        {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="mb-3">
-            <label for="title">제목</label>
-            <input type="text" class="form-control" name="title", id='title'
-                value="{{ form.title.value|default_if_none:'' }}" placeholder="64자 이하의 텍스트를 입력하세요.">
-        </div>
-        <div class="mb-3">
-            <label for="price">가격</label>
-            <input type="text" class="form-control" name="price", id='price'
-                value="{{ form.price.value|default_if_none:'' }}" placeholder="0 이상의 숫자를 입력하세요.">
-        </div>
-        <div class="mb-3">
-            <label for="size">호수</label>
-            <input type="text" class="form-control" name="size" id="size"
-                value="{{ form.size.value|default_if_none:'' }}" placeholder="1 이상 500 이하의 숫자를 입력하세요.">
-        </div>
-
-        <button id="btn-submit" type="submit" class="btn btn-primary">등록</button>
-    </form>
+  <h2>작품 등록 페이지</h2>
+  <form method="post" action="{% url 'gallery:artwork-create' %}">
+    {% csrf_token %}
+    {% include "form_errors.html" %}
+    <div class="mb-3">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" name="title" , id="title" value="{{ form.title.value|default_if_none:'' }}" placeholder="64자 이하의 텍스트를 입력하세요." />
+    </div>
+    <div class="mb-3">
+      <label for="price">가격</label>
+      <input type="text" class="form-control" name="price" , id="price" value="{{ form.price.value|default_if_none:'' }}" placeholder="0 이상의 숫자를 입력하세요." />
+    </div>
+    <div class="mb-3">
+      <label for="size">호수</label>
+      <input type="text" class="form-control" name="size" id="size" value="{{ form.size.value|default_if_none:'' }}" placeholder="1 이상 500 이하의 숫자를 입력하세요." />
+    </div>
+    <button id="btn-submit" type="submit" class="btn btn-primary">등록</button>
+  </form>
 </div>
 
 <script>
-    const el = document.getElementById('price');
-    const btn = document.getElementById('btn-submit');
-
-    function ChangeToNumber(value) {
-        return Number(value.replace(/\,/g, ''));
-    };
-
-    el.addEventListener('input', function() {
+  const el = document.getElementById("price");
+  const btn = document.getElementById("btn-submit");
+  function ChangeToNumber(value) {
+    return Number(value.replace(/\,/g, ""));
+  }
+  el.addEventListener("input", function () {
     const price = el.value;
-    const price_num = ChangeToNumber(price)
-    if (isNaN(price_num)==true || price_num==0){
-        el.value='';
+    const price_num = ChangeToNumber(price);
+    if (isNaN(price_num) == true || price_num == 0) {
+      el.value = "";
     } else {
-        el.value=price_num.toLocaleString();
-    };
-    });
-
-    btn.addEventListener('click', function() {
-        el.value = ChangeToNumber(el.value);
-    });
+      el.value = price_num.toLocaleString();
+    }
+  });
+  btn.addEventListener("click", function () {
+    el.value = ChangeToNumber(el.value);
+  });
 </script>
 {% endblock %}

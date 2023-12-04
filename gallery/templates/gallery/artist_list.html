@@ -1,64 +1,63 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <table class="table table-hover text-center mt-5">
-    <thead class="thead">
-        <tr>
-            <th>이름</th>
-            <th>성별</th>
-            <th>생년월일</th>
-            <th>이메일</th>
-            <th>연락처</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% if artists %}
-        {% for artist in artists %}
-        <tr>
-            <td>{{ artist.name }}</td>
-            {% if artist.gender == 'm' %}
-            <td>남자</td>
-            {% else %}
-            <td>여자</td>
-            {% endif %}
-            <td>{{ artist.birth_date }}</td>
-            <td>{{ artist.email }}</td>
-            <td>{{ artist.phone }}</td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-            <td colspan="5">출력할 작가 정보가 없습니다.</td>
-        </tr>
-        {% endif %}
-    </tbody>
+  <thead class="thead">
+    <tr>
+      <th>이름</th>
+      <th>성별</th>
+      <th>생년월일</th>
+      <th>이메일</th>
+      <th>연락처</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if artists %}
+    {% for artist in artists %}
+    <tr>
+      <td>{{ artist.name }}</td>
+      {% if artist.gender == 'm' %}
+      <td>남자</td>
+      {% else %}
+      <td>여자</td>
+      {% endif %}
+      <td>{{ artist.birth_date }}</td>
+      <td>{{ artist.email }}</td>
+      <td>{{ artist.phone }}</td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <tr>
+      <td colspan="5">출력할 작가 정보가 없습니다.</td>
+    </tr>
+    {% endif %}
+  </tbody>
 </table>
-<form class="d-flex" role="search" action="{% url "gallery:artist-search" %}">
-    <select class="form-select" name="search-option" id="search-option">
-        <option value="name">이름</option>
-        <option value="gender">성별</option>
-        <option value="birth_date">생년월일</option>
-        <option value="email">이메일</option>
-        <option value="phone">연락처</option>
-    </select>
-    <input class="form-control" type="search" placeholder="검색 키워드를 입력하세요" name="search-keyword" id="search-keyword">
-    <input type="submit" value="검색" class="btn btn-outline-success">
+<form class="d-flex" role="search" action="{% url 'gallery:artist-search' %}">
+  <select class="form-select" name="search-option" id="search-option">
+    <option value="name">이름</option>
+    <option value="gender">성별</option>
+    <option value="birth_date">생년월일</option>
+    <option value="email">이메일</option>
+    <option value="phone">연락처</option>
+  </select>
+  <input class="form-control" type="search" placeholder="검색 키워드를 입력하세요" name="search-keyword" id="search-keyword" />
+  <input type="submit" value="검색" class="btn btn-outline-success" />
 </form>
 
 <script>
-    const searchOptionEl = document.getElementById('search-option');
-    const searchKeywordEl = document.getElementById('search-keyword');
-    searchOptionEl.addEventListener('change', function() {
-        const searchOptionValue = searchOptionEl.options[searchOptionEl.selectedIndex].value;
-        if (searchOptionValue=="gender"){
-            searchKeywordEl.setAttribute('placeholder', 'm(남자) 또는 f(여자)');
-        } else if (searchOptionValue=="birth_date") {
-            searchKeywordEl.setAttribute('placeholder', 'YYYY-MM-DD');
-        } else if (searchOptionValue=="phone") {
-            searchKeywordEl.setAttribute('placeholder', '000-0000-0000');
-        } else{
-            searchKeywordEl.setAttribute('placeholder', '검색 키워드를 입력하세요');
-        };
-    });
+  const searchOptionEl = document.getElementById("search-option");
+  const searchKeywordEl = document.getElementById("search-keyword");
+  searchOptionEl.addEventListener("change", function () {
+    const searchOptionValue = searchOptionEl.options[searchOptionEl.selectedIndex].value;
+    if (searchOptionValue == "gender") {
+      searchKeywordEl.setAttribute("placeholder", "m(남자) 또는 f(여자)");
+    } else if (searchOptionValue == "birth_date") {
+      searchKeywordEl.setAttribute("placeholder", "YYYY-MM-DD");
+    } else if (searchOptionValue == "phone") {
+      searchKeywordEl.setAttribute("placeholder", "000-0000-0000");
+    } else {
+      searchKeywordEl.setAttribute("placeholder", "검색 키워드를 입력하세요");
+    }
+  });
 </script>
-{% endblock  %}
+{% endblock %}

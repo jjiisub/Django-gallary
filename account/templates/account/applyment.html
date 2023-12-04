@@ -1,43 +1,35 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 <div class="container mt-5 my-3">
-    <h2>작가 등록 신청 페이지</h2>
-    <form method="post" action="{% url 'account:apply' %}">
-        {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="mb-3">
-            <label for="name">이름</label>
-            <input type="text" class="form-control" name="name", id='name'
-                value="{{ form.name.value|default_if_none:'' }}">
-        </div>
-        <div class="mb-3">
-            <label for="gender">성별</label>
-            <select class="form-control" name="gender" id="gender">
-                <option value="">---------</option>
-                <option value="m">남자</option>
-                <option value="f">여자</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="birth_date">생년월일</label>
-            <input type="text" class="form-control" name="birth_date" id="birth_date"
-                value="{{ form.birth_date.value|default_if_none:'' }}" placeholder="YYYY-MM-DD">
-        </div>
-        <div class="mb-3">
-            <label for="email">이메일</label>
-            <input type="text" class="form-control" name="email" id="email"
-                value="{{ form.email.value|default_if_none:'' }}" placeholder="아이디@도메인">
-        </div>
-        <div class="mb-3">
-            <label for="phone">연락처</label>
-            <input type="text" class="form-control" name="phone" id="phone"
-                value="{{ form.phone.value|default_if_none:'' }}" placeholder="000-0000-0000">
-        </div>
-
-        <button type="submit" class="btn btn-outline-success">신청</button>
-    </form>
+  <h2>작가 등록 신청 페이지</h2>
+  <form method="post" action="{% url 'account:apply' %}">
+    {% csrf_token %}
+    {% include "form_errors.html" %}
+    <div class="mb-3">
+      <label for="name">이름</label>
+      <input type="text" class="form-control" name="name" , id="name" value="{{ form.name.value|default_if_none:'' }}" />
+    </div>
+    <div class="mb-3">
+      <label for="gender">성별</label>
+      <select class="form-control" name="gender" id="gender">
+        <option value="">---------</option>
+        <option value="m">남자</option>
+        <option value="f">여자</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="birth_date">생년월일</label>
+      <input type="text" class="form-control" name="birth_date" id="birth_date" value="{{ form.birth_date.value|default_if_none:'' }}" placeholder="YYYY-MM-DD" />
+    </div>
+    <div class="mb-3">
+      <label for="email">이메일</label>
+      <input type="text" class="form-control" name="email" id="email" value="{{ form.email.value|default_if_none:'' }}" placeholder="아이디@도메인" />
+    </div>
+    <div class="mb-3">
+      <label for="phone">연락처</label>
+      <input type="text" class="form-control" name="phone" id="phone" value="{{ form.phone.value|default_if_none:'' }}" placeholder="000-0000-0000" />
+    </div>
+    <button type="submit" class="btn btn-outline-success">신청</button>
+  </form>
 </div>
-
 {% endblock %}

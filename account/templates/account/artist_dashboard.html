@@ -1,99 +1,98 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="card mt-5">
   <h5 class="card-header">프로필</h5>
   <div class="card-body">
     <table class="table text-center">
-    <thead class="thead">
+      <thead class="thead">
         <tr>
-            <th>이름</th>
-            <th>성별</th>
-            <th>생년월일</th>
-            <th>이메일</th>
-            <th>연락처</th>
+          <th>이름</th>
+          <th>성별</th>
+          <th>생년월일</th>
+          <th>이메일</th>
+          <th>연락처</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr>
-            <td>{{ artist.name }}</td>
-            {% if artist.gender == 'm' %}
-            <td>남자</td>
-            {% else %}
-            <td>여자</td>
-            {% endif %}
-            <td>{{ artist.birth_date }}</td>
-            <td>{{ artist.email }}</td>
-            <td>{{ artist.phone }}</td>
+          <td>{{ artist.name }}</td>
+          {% if artist.gender == 'm' %}
+          <td>남자</td>
+          {% else %}
+          <td>여자</td>
+          {% endif %}
+          <td>{{ artist.birth_date }}</td>
+          <td>{{ artist.email }}</td>
+          <td>{{ artist.phone }}</td>
         </tr>
-    </tbody>
-</table>    
+      </tbody>
+    </table>
   </div>
 </div>
 
 <div class="card mt-5">
-    <h5 class="card-header">작품 목록</h5>
-    <a href="{% url "gallery:artwork-create" %}" class="btn btn-outline-success">+</a>
-    <div class="card-body">
+  <h5 class="card-header">작품 목록</h5>
+  <a href="{% url 'gallery:artwork-create' %}" class="btn btn-outline-success">+</a>
+  <div class="card-body">
     {% if artworks %}
     <table class="table table-hover text-center">
-        <thead class="thead">
-            <tr>
-                <th>제목</th>
-                <th>가격</th>
-                <th>호수</th>
-                <th>등록일</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for artwork in artworks %}
-            <tr>
-                <td>{{ artwork.title }}</td>
-                <td>{{ artwork.price }}</td>
-                <td>{{ artwork.size }}</td>
-                <td>{{ artwork.created_at }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
+      <thead class="thead">
+        <tr>
+          <th>제목</th>
+          <th>가격</th>
+          <th>호수</th>
+          <th>등록일</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for artwork in artworks %}
+        <tr>
+          <td>{{ artwork.title }}</td>
+          <td>{{ artwork.price }}</td>
+          <td>{{ artwork.size }}</td>
+          <td>{{ artwork.created_at }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
     {% else %}
     <p class="card-title">등록된 작품이 없습니다.</p>
     {% endif %}
-    </div>
+  </div>
 </div>
 
 <div class="card mt-5">
   <h5 class="card-header">전시 목록</h5>
-  <a href="{% url "gallery:exhibition-create" %}" class="btn btn-outline-success">+</a>
+  <a href="{% url 'gallery:exhibition-create' %}" class="btn btn-outline-success">+</a>
   <div class="card-body">
     {% if exhibitions %}
     <table class="table table-hover text-center">
-        <thead class="thead">
-            <tr>
-                <th>제목</th>
-                <th>전시 일정</th>
-                <th>작품 목록</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for exhibition in exhibitions %}
-            <tr>
-                <td>{{ exhibition.title }}</td>
-                <td>{{ exhibition.start_date }} ~ {{ exhibition.end_date }}</td>
-                <td>
-                    <ul class="list-group">
-                    {% for elem in exhibition.artworks.all %}
-                    <li class="list-group-item list-group-item-action">{{ elem }}</li>
-                    {% endfor %}
-                    </ul>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
+      <thead class="thead">
+        <tr>
+          <th>제목</th>
+          <th>전시 일정</th>
+          <th>작품 목록</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for exhibition in exhibitions %}
+        <tr>
+          <td>{{ exhibition.title }}</td>
+          <td>{{ exhibition.start_date }} ~ {{ exhibition.end_date }}</td>
+          <td>
+            <ul class="list-group">
+              {% for elem in exhibition.artworks.all %}
+              <li class="list-group-item list-group-item-action">{{ elem }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
     </table>
     {% else %}
     <p class="card-title">등록된 전시가 없습니다.</p>
     {% endif %}
   </div>
 </div>
-{% endblock  %}
+{% endblock %}

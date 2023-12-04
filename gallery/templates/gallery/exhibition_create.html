@@ -1,38 +1,31 @@
 {% extends "base.html" %}
-
 {% block content %}
-
 <div class="container mt-5 my-3">
-    <h2>전시 등록 페이지</h2>
-    <form method="post" action="{% url 'gallery:exhibition-create' %}">
-        {% csrf_token %}
-        {% include "form_errors.html" %}
-        <div class="mb-3">
-            <label for="title">제목</label>
-            <input type="text" class="form-control" name="title", id='title'
-                value="{{ form.title.value|default_if_none:'' }}" placeholder="64자 이하의 텍스트를 입력하세요.">
-        </div>
-        <div class="mb-3">
-            <label for="start_date">시작일</label>
-            <input type="text" class="form-control" name="start_date", id='start_date'
-                value="{{ form.start_date.value|default_if_none:'' }}" placeholder="YYYY-MM-DD">
-        </div>
-        <div class="mb-3">
-            <label for="end_date">종료일</label>
-            <input type="text" class="form-control" name="end_date" id="end_date"
-                value="{{ form.end_date.value|default_if_none:'' }}" placeholder="YYYY-MM-DD">
-        </div>
-        {% comment %} <p>{{form.artworks}}</p> {% endcomment %}
-        <div class="mb-3">
-            <label for="artworks">작품 목록</label>
-            <div class="list-group" id="artworks">
-            {% for elem in form.artworks %}
-                <label class="list-group-item list-group-item-action">{{ elem }}</label>
-            {% endfor %}
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">등록</button>
-    </form>
+  <h2>전시 등록 페이지</h2>
+  <form method="post" action="{% url 'gallery:exhibition-create' %}">
+    {% csrf_token %}
+    {% include "form_errors.html" %}
+    <div class="mb-3">
+      <label for="title">제목</label>
+      <input type="text" class="form-control" name="title" , id="title" value="{{ form.title.value|default_if_none:'' }}" placeholder="64자 이하의 텍스트를 입력하세요." />
+    </div>
+    <div class="mb-3">
+      <label for="start_date">시작일</label>
+      <input type="text" class="form-control" name="start_date" , id="start_date" value="{{ form.start_date.value|default_if_none:'' }}" placeholder="YYYY-MM-DD" />
+    </div>
+    <div class="mb-3">
+      <label for="end_date">종료일</label>
+      <input type="text" class="form-control" name="end_date" id="end_date" value="{{ form.end_date.value|default_if_none:'' }}" placeholder="YYYY-MM-DD" />
+    </div>
+    <div class="mb-3">
+      <label for="artworks">작품 목록</label>
+      <div class="list-group" id="artworks">
+        {% for elem in form.artworks %}
+        <label class="list-group-item list-group-item-action">{{ elem }}</label>
+        {% endfor %}
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">등록</button>
+  </form>
 </div>
-
 {% endblock %}
