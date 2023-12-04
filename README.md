@@ -63,6 +63,7 @@ ScreenShots
 ### 기능 구현
 
 - #### 작품 등록 가격 콤마 표시
+- #### [작품 등록 가격 콤마 표시](https://github.com/jjiisub/Django-gallery.wiki.git)
 
 작품 등록 페이지에서 가격을 입력할 때, 천 단위마다 콤마를 출력하는 기능을 JavaScript로 구현했습니다. 가격 element에 입력이 될 때마다 입력값이 숫자 형식인지 확인하고, 천 단위마다 콤마를 삽입합니다. 제출 버튼을 누르면 콤마를 제거한 값을 form으로 넘겨줍니다.
 
@@ -157,6 +158,7 @@ class ArtworkSearchView(ListView):
 ```
 
 ```js
+// gallery/templates/gallery/artwork_list.html
 const searchOptionEl = document.getElementById("search-option");
 const searchOptionCompareEl = document.getElementById("search-option-compare");
 searchOptionEl.addEventListener("change", function () {
@@ -196,7 +198,6 @@ approve_list, reject_list에는 각각 승인, 반려가 선택된 applyment 객
 
 ```python
 ## management/views.py
-
 class ApplymentManageView(ManagerOnlyMixin, View):
     ...
     def post(self, request):
