@@ -6,11 +6,11 @@
 
 ### Test Account
 
-    | Username |   Password   |    Description    |
-    | :------: | :----------: | :---------------: |
-    |  admin1  | adminadmin11 |      Manager      |
-    |  user1   |  useruser11  |      Artist       |
-    |  user6   |  useruser66  | User (not Artist) |
+| Username |   Password   |    Description    |
+| :------: | :----------: | :---------------: |
+|  admin1  | adminadmin11 |      Manager      |
+|  user1   |  useruser11  |      Artist       |
+|  user6   |  useruser66  | User (not Artist) |
 
 ## Environment
 
