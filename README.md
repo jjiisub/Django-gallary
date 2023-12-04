@@ -111,6 +111,8 @@ class ApplymentManageView(ManagerOnlyMixin, View):
 
 ```python
 ## management/views.py
+import csv
+
 class ApplymentDownloadView(ManagerOnlyMixin, View):
     def get(self, request):
         applyments = Applyment.objects.all().order_by('-created_at')
@@ -127,6 +129,25 @@ class ApplymentDownloadView(ManagerOnlyMixin, View):
 ```
 
 - #### 작가 통계
+
+```python
+## management/views.py
+from django.db.models import Count, Avg, Q
+
+class ArtistStatisticsView(ManagerOnlyMixin, ListView):
+    model = Artist
+    ordering = '-created_at'
+    context_object_name = 'artists'
+    template_name = "management/statistics.html"
+
+    def get_queryset(self):
+        queryset = Artist.objects.annotate(
+            artwork_count=Count('artworks'),
+            artwork_count_lte_size_100=Count('artworks', filter=Q(artworks__size__lte=100)),
+            artwork_avg_price=Avg('artworks__price')
+        )
+        return queryset
+```
 
 ### Validation
 
