@@ -11,12 +11,12 @@
 
 ### Test Account
 
-| Username <img width=300/> | Password <img width=300/> | Authority <img width=300/> |
-| :-----------------------: | :-----------------------: | :------------------------: |
-|           admin           |           admin           |           Admin            |
-|          manager          |       adminadmin11        |          Manager           |
-|           user1           |        useruser11         |           Artist           |
-|           user4           |        useruser44         |      User(not Artist)      |
+| Username | Password | Authority |
+| <img width=33%/> | <img width=33%/> | <img width=33%/> |
+| admin | admin | Admin |
+| manager | adminadmin11 | Manager |
+| user1 | useruser11 | Artist |
+| user4 | useruser44 | User(not Artist) |
 
 # Installation
 
@@ -64,7 +64,7 @@ Schema Diagram
 
 |       App        |            Path            |         Description          |
 | :--------------: | :------------------------: | :--------------------------: |
-| <img width=300/> |      <img width=300/>      |       <img width=300/>       |
+| <img width=20%/> |      <img width=40%/>      |       <img width=40%/>       |
 |    `account`     |      account/signup/       |           회원가입           |
 |                  |       account/login/       |            로그인            |
 |                  |      account/logout/       |           로그아웃           |
