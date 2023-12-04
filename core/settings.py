@@ -23,6 +23,9 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = [env('SERVER_IP'), '127.0.0.1']
 
+STATIC_ROOT = BASE_DIR / 'static/'
+STATICFILES_DIRS = []
+
 
 # Application definition
 
