@@ -1,5 +1,17 @@
 # Django-gallery
 
+## Deployment
+
+- [http://develearn.co.kr](http://develearn.co.kr)
+
+### Test Account
+
+    | Username |   Password   |    Description    |
+    | :------: | :----------: | :---------------: |
+    |  admin1  | adminadmin11 |      Manager      |
+    |  user1   |  useruser11  |      Artist       |
+    |  user6   |  useruser66  | User (not Artist) |
+
 ## Environment
 
 - Python 3.11.6
@@ -37,7 +49,11 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-## Features
+## Structure
+
+### ERD
+
+entity relationship diagram
 
 ### Endpoints
 
@@ -54,11 +70,15 @@ $ python manage.py runserver
 |               | exhibition/create/ |             |
 | `management/` |       apply/       |             |
 
+### Server Structure
+
+서버 구조 이미지
+
 ### Demo
 
 ScreenShots
 
-## Troubleshootings
+## Features
 
 ### 기능 구현
 
