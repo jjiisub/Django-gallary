@@ -11,4 +11,3 @@ urlpatterns = [
     path('apply/', views.ApplymentCreateView.as_view(), name='apply'),
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
 ]
-

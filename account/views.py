@@ -56,7 +56,7 @@ class ApplymentCreateView(LoginRequiredMixin, View):
             return redirect("gallery:index")
         else:
             context = {
-            'form': form,
+                'form': form,
             }
             return render(request, "account/applyment.html", context)
 
