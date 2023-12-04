@@ -34,7 +34,7 @@ class UserLoginView(LoginView):
 
 class UserLogoutView(LogoutView):
     model = User
-    next_page = "gallery:artwork-list"
+    next_page = "gallery:index"
 
 
 class ApplymentCreateView(LoginRequiredMixin, View):
