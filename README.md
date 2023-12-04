@@ -65,13 +65,12 @@ Column 2
 </tr>
 </table>
 
-|     Username     |     Password     |    Authority     |
-| :--------------: | :--------------: | :--------------: |
-|      admin       |      admin       |      Admin       |
-|     manager      |   adminadmin11   |     Manager      |
-|      user1       |    useruser11    |      Artist      |
-|      user4       |    useruser44    | User(not Artist) |
-| <img width=300/> | <img width=300/> | <img width=300/> |
+|        Username        |          Password           |            Authority             |
+| :--------------------: | :-------------------------: | :------------------------------: |
+|         admin          |            admin            |              Admin               |
+|        manager         |        adminadmin11         |             Manager              |
+|         user1          |         useruser11          |              Artist              |
+| user4 <img width=300/> | useruser44 <img width=300/> | User(not Artist)<img width=300/> |
 
 # Installation
 
