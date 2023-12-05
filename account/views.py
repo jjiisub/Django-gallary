@@ -16,7 +16,11 @@ class UserCreateView(CreateView):
     Attrs:
         template_name:  회원가입 템플릿
         form_class:     회원가입 form
-        success_url:    회원가입 성공 페이지
+        success_url:    로그인 페이지
+
+    Returns:
+        GET:    회원가입 페이지
+        POST:   회원가입 요청 후 로그인 페이지
     '''
     template_name = "account/signup.html"
     form_class = UserCreateForm
@@ -28,9 +32,13 @@ class UserLoginView(LoginView):
     User 로그인 View
 
     Attrs:
-        model:          모델
-        template_name:  로그인 템플릿
-        redirect_authenticated_user:    이미 로그인된 경우 redirect 여부
+        model:                          User 모델
+        template_name:                  로그인 템플릿
+        redirect_authenticated_user:    이미 로그인된 경우 메인페이지 이동
+
+    Returns:
+        GET:    로그인 페이지
+        POST:   로그인 요청 결과
     '''
     model = User
     template_name = 'account/login.html'
@@ -62,8 +70,11 @@ class UserLogoutView(LogoutView):
     User 로그아웃 View
 
     Attrs:
-        model:      모델
-        next_page:  로그아웃 성공 페이지
+        model:      User 모델
+        next_page:  메인페이지
+
+    Returns:
+        메인페이지
     '''
     model = User
     next_page = "gallery:index"
