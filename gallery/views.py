@@ -31,9 +31,10 @@ class ArtistSearchView(ListView):
             return queryset
         if option in ['name', 'email']:
             queryset = Artist.objects.filter(
-                **{f'{option}__icontains': keyword})
+                **{f'{option}__icontains': keyword}).order_by('-created_at')
         elif option in ['gender', 'birth_date', 'phone']:
-            queryset = Artist.objects.filter(**{option: keyword})
+            queryset = Artist.objects.filter(
+                **{option: keyword}).order_by('-created_at')
         return queryset
 
 
@@ -53,13 +54,14 @@ class ArtworkSearchView(ListView):
         keyword = self.request.GET.get("search-keyword")
         queryset = []
         if option == 'title':
-            queryset = Artwork.objects.filter(title__icontains=keyword)
+            queryset = Artwork.objects.filter(
+                title__icontains=keyword).order_by('-created_at')
         elif option == 'price' or option == 'size':
             comp = self.request.GET.get("search-option-compare")
             option_compare = '__gte' if comp == "more" else '__lte'
             try:
                 queryset = Artwork.objects.filter(
-                    **{f'{option}{option_compare}': keyword})
+                    **{f'{option}{option_compare}': keyword}).order_by('-created_at')
             except:
                 pass
         return queryset
