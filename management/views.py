@@ -65,10 +65,10 @@ class ApplymentSearchView(ManagerOnlyMixin, ListView):
             return queryset
         if option in ['name', 'email']:
             queryset = Applyment.objects.filter(
-                **{f'{option}__icontains': keyword})
+                **{f'{option}__icontains': keyword}).order_by('-created_at')
         elif option in ['gender', 'birth_date', 'phone']:
             queryset = Applyment.objects.filter(
-                **{option: keyword})
+                **{option: keyword}).order_by('-created_at')
         return queryset
 
 
