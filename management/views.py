@@ -64,10 +64,11 @@ class ApplymentSearchView(ManagerOnlyMixin, ListView):
         if not keyword:
             return queryset
         if option in ['name', 'email']:
-            queryset = Artist.objects.filter(
+            queryset = Applyment.objects.filter(
                 **{f'{option}__icontains': keyword})
         elif option in ['gender', 'birth_date', 'phone']:
-            queryset = Artist.objects.filter(**{option: keyword})
+            queryset = Applyment.objects.filter(
+                **{option: keyword})
         return queryset
 
 
