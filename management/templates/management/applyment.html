@@ -30,7 +30,7 @@
           <td>{{ applyment.birth_date }}</td>
           <td>{{ applyment.email }}</td>
           <td>{{ applyment.phone }}</td>
-          <td>{{ applyment.created_at }}</td>
+          <td>{{ applyment.created_at | date:"y.m.d H:i:s" }}</td>
           {% if applyment.is_approved %}
           <td><input type="checkbox" checked disabled /></td>
           <td><input type="checkbox" disabled /></td>
