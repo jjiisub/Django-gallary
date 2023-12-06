@@ -8,6 +8,8 @@ from django.views.generic import CreateView
 from .forms import ApplymentCreateForm, UserCreateForm
 from .models import User
 
+from gallery.models import Artist, Exhibition
+
 
 class UserCreateView(CreateView):
     '''
@@ -134,12 +136,13 @@ class DashboardView(LoginRequiredMixin, View):
 
     def get(self, request):
         if request.user.is_artist:
-            artist = request.user.artist
-            artworks = artist.artworks.all()
-            exhibitions = artist.exhibitions.all()
+            artist = Artist.objects.prefetch_related(
+                'artworks').get(user=request.user)
+            exhibitions = Exhibition.objects.filter(
+                artist=artist).all().prefetch_related('artworks')
             context = {
                 'artist': artist,
-                'artworks': artworks,
+                'artworks': artist.artworks.all(),
                 'exhibitions': exhibitions,
             }
             return render(request, "account/artist_dashboard.html", context)

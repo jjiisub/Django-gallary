@@ -85,16 +85,18 @@ class ArtworkListView(ListView):
     작품 목록조회 View
 
     Attrs:
-        model:                  작품 모델
-        ordering:               최근 등록된 순서
-        context_object_name:    "artworks"
+        context_object_name:    'artworks'
+        template_name:          작품 목록조회 템플릿
 
     Returns:
         작품 목록조회 페이지
     '''
-    model = Artwork
-    ordering = '-created_at'
     context_object_name = 'artworks'
+    template_name = 'gallery/artwork_list.html'
+
+    def get_queryset(self):
+        queryset = Artwork.objects.all().select_related("artist")
+        return queryset
 
 
 class ArtworkSearchView(ListView):
@@ -102,7 +104,6 @@ class ArtworkSearchView(ListView):
     작가 검색 View
 
     Attrs:
-        model:                  작품 모델
         context_object_name:    "artworks"
         template_name:          작품 목록조회 템플릿
 
@@ -112,7 +113,6 @@ class ArtworkSearchView(ListView):
             title:          keyword를 포함하는 검색 결과
             price, size:    keyword 이상 또는 이하의 결과
     '''
-    model = Artwork
     context_object_name = 'artworks'
     template_name = "gallery/artwork_list.html"
 
@@ -131,13 +131,13 @@ class ArtworkSearchView(ListView):
         queryset = []
         if option == 'title':
             queryset = Artwork.objects.filter(
-                title__icontains=keyword).order_by('-created_at')
+                title__icontains=keyword).select_related('artist').order_by('-created_at')
         elif option == 'price' or option == 'size':
             comp = self.request.GET.get("search-option-compare")
             option_compare = '__gte' if comp == "more" else '__lte'
             try:
                 queryset = Artwork.objects.filter(
-                    **{f'{option}{option_compare}': keyword}).order_by('-created_at')
+                    **{f'{option}{option_compare}': keyword}).select_related('artist').order_by('-created_at')
             except:
                 pass
         return queryset
