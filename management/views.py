@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView
+from django.db import transaction
 
 from account.models import Applyment, User
 from core.mixins import ManagerOnlyMixin
@@ -47,23 +48,35 @@ class ApplymentManageView(ManagerOnlyMixin, View):
                 'errors': '승인과 반려를 동시에 선택할 수 없습니다.',
             }
             return render(request, "management/applyment.html", context)
-        Applyment.objects.filter(id__in=approve_list).update(
-            is_approved=True, is_rejected=False)
-        Applyment.objects.filter(id__in=reject_list).update(
-            is_rejected=True, is_approved=False)
-        User.objects.filter(
-            applyment__pk__in=approve_list).update(is_artist=True)
-        for pk in approve_list:
-            applyment = Applyment.objects.get(pk=pk)
-            new_artist = Artist.objects.create(
-                user=applyment.user,
-                name=applyment.name,
-                gender=applyment.gender,
-                birth_date=applyment.birth_date,
-                email=applyment.email,
-                phone=applyment.phone,
-            )
-            new_artist.save()
+        try:
+            with transaction.atomic():
+                Applyment.objects.filter(id__in=approve_list).update(
+                    is_approved=True, is_rejected=False)
+                Applyment.objects.filter(id__in=reject_list).update(
+                    is_rejected=True, is_approved=False)
+                User.objects.filter(
+                    applyment__pk__in=approve_list).update(is_artist=True)
+                applyments = Applyment.objects.filter(
+                    pk__in=approve_list).select_related('user')
+                artists_data = [
+                    Artist(
+                        user=applyment.user,
+                        name=applyment.name,
+                        gender=applyment.gender,
+                        birth_date=applyment.birth_date,
+                        email=applyment.email,
+                        phone=applyment.phone,
+                    )
+                    for applyment in applyments
+                ]
+                Artist.objects.bulk_create(artists_data)
+        except:
+            applyments = Applyment.objects.all().order_by('-created_at')
+            context = {
+                'applyments': applyments,
+                'errors': '일괄 처리 과정에서 문제가 발생했습니다.',
+            }
+            return render(request, "management/applyment.html", context)
         return redirect("management:apply")
 
 
@@ -72,7 +85,6 @@ class ApplymentSearchView(ManagerOnlyMixin, ListView):
     작가등록신청 검색 View
 
     Attrs:
-        model:                  Applyment 모델
         context_object_name:    "applyments"
         template_name:          작가등록신청관리 템플릿
 
@@ -86,7 +98,6 @@ class ApplymentSearchView(ManagerOnlyMixin, ListView):
             name, email:                keyword를 포함하는 검색 결과
             gender, birth_date, phone:  keyword와 일치하는 검색 결과
     '''
-    model = Applyment
     context_object_name = 'applyments'
     template_name = "management/applyment.html"
 
@@ -147,7 +158,6 @@ class ArtistStatisticsView(ManagerOnlyMixin, ListView):
     작가 통계 View
 
     Attrs:
-        model:                  작가 모델
         context_object_name:    "artists"
         template_name:          작가 통계 템플릿
 
@@ -158,7 +168,6 @@ class ArtistStatisticsView(ManagerOnlyMixin, ListView):
     Returns:
         작가 통계 페이지
     '''
-    model = Artist
     context_object_name = 'artists'
     template_name = "management/statistics.html"
 
@@ -173,6 +182,7 @@ class ArtistStatisticsView(ManagerOnlyMixin, ListView):
             artwork_count=Count('artworks'),
             artwork_count_lte_size_100=Count(
                 'artworks', filter=Q(artworks__size__lte=100)),
-            artwork_avg_price=Avg('artworks__price')
-        )
+            artwork_avg_price=Avg('artworks__price'),
+            exhibition_count=Count('exhibitions'),
+        ).order_by('created_at')
         return queryset

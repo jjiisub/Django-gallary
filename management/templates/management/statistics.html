@@ -7,6 +7,8 @@
       <th>작품수</th>
       <th>작품수 (100호 이하)</th>
       <th>작품 평균 가격</th>
+      <th>전시수</th>
+      <th>마지막 접속</th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +18,9 @@
       <td>{{ artist.name }}</td>
       <td>{{ artist.artwork_count }}</td>
       <td>{{ artist.artwork_count_lte_size_100 }}</td>
-      <td>{{ artist.artwork_avg_price }}</td>
+      <td>{{ artist.artwork_avg_price | default_if_none:"-" }}</td>
+      <td>{{ artist.exhibition_count }}</td>
+      <td>{{ artist.user.last_login | date:"y.m.d H:i:s" }}</td>
     </tr>
     {% endfor %}
     {% else %}
