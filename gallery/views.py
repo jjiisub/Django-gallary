@@ -2,8 +2,9 @@ from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic.list import ListView
 
-from .forms import ArtworkCreateForm, ExhibitionCreateForm
 from core.mixins import ArtistRequiredMixin
+
+from .forms import ArtworkCreateForm, ExhibitionCreateForm
 from .models import Artist, Artwork
 
 

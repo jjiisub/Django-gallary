@@ -1,8 +1,8 @@
 from django.db import models
 
 from account.models import User
-
-from core.validators import DateValidator, ArtworkPriceValidator, ArtworkSizeValidator
+from core.validators import (ArtworkPriceValidator, ArtworkSizeValidator,
+                             DateValidator)
 
 
 class Artist(models.Model):

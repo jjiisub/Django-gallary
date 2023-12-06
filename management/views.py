@@ -1,14 +1,14 @@
 import csv
 
-from django.shortcuts import redirect, render
-from django.db.models import Count, Avg, Q
-from django.views.generic import ListView
+from django.db.models import Avg, Count, Q
 from django.http import HttpResponse
+from django.shortcuts import redirect, render
 from django.views import View
+from django.views.generic import ListView
 
-from core.validators import ApproveRejectValidator
-from core.mixins import ManagerOnlyMixin
 from account.models import Applyment, User
+from core.mixins import ManagerOnlyMixin
+from core.validators import ApproveRejectValidator
 from gallery.models import Artist
 
 
