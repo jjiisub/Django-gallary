@@ -57,7 +57,7 @@
 
 |              Role              |        Detail         |                          Link                          |    Authority     |                                                   Issues                                                    |
 | :----------------------------: | :-------------------: | :----------------------------------------------------: | :--------------: | :---------------------------------------------------------------------------------------------------------: |
-|        <img width=200/>        |   <img width=200/>    |                    <img width=50/>                     | <img width=200/> |                                              <img width=300/>                                               |
+|        <img width=200/>        |   <img width=300/>    |                    <img width=50/>                     | <img width=100/> |                                              <img width=300/>                                               |
 |  <strong>고객 페이지</strong>  |       회원가입        |    [link](https://develearn.co.kr/account/signup/)     |        -         |                                                      -                                                      |
 |                                |        로그인         |     [link](https://develearn.co.kr/account/login/)     |        -         |           [로그인 성공 페이지](https://github.com/jjiisub/Django-gallery/wiki/로그인-성공-페이지)           |
 |                                |     작가목록 조회     |      [link](https://develearn.co.kr/artist/list/)      |        -         |                                                      -                                                      |
