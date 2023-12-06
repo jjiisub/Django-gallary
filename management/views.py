@@ -179,10 +179,10 @@ class ArtistStatisticsView(ManagerOnlyMixin, ListView):
             작가 별 작품수, 100호 이하 작품수, 작품 평균가격 결과
         '''
         queryset = Artist.objects.annotate(
-            artwork_count=Count('artworks'),
+            artwork_count=Count('artworks', distinct=True),
+            exhibition_count=Count('exhibitions', distinct=True),
             artwork_count_lte_size_100=Count(
-                'artworks', filter=Q(artworks__size__lte=100)),
+                'artworks', filter=Q(artworks__size__lte=100), distinct=True),
             artwork_avg_price=Avg('artworks__price'),
-            exhibition_count=Count('exhibitions'),
         ).order_by('created_at')
         return queryset
