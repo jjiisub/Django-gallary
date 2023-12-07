@@ -66,8 +66,8 @@ def ApproveRejectValidator(approve_list, reject_list):
     작가등록신청관리 validation 함수
 
     Args:
-        approve_list(list): 승인이 선택된 Applyment PK
-        reject_list(list):  반려가 선택된 Applyment PK
+        approve_list(list): 승인이 선택된 Applyment PK 리스트
+        reject_list(list):  반려가 선택된 Applyment PK 리스트
 
     Raises:
         ValidationError:    승인과 반려가 동시에 선택된 Applyment가 있는 경우

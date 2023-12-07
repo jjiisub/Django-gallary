@@ -6,7 +6,7 @@ class ArtistRequiredMixin(AccessMixin):
     '''
     is_artist 권한 확인 Mixin
 
-    Raises:
+    Returns:
         NOT is_authenticated:   로그인 페이지
         NOT is_artist:          401_UNAUTHORIZED
     '''
@@ -26,7 +26,7 @@ class ManagerOnlyMixin(AccessMixin):
 
     Raises:
         NOT is_authenticated:   로그인 페이지
-        NOT is_artist:          401_UNAUTHORIZED
+        NOT is_manager:          401_UNAUTHORIZED
     '''
 
     def dispatch(self, request, *args, **kwargs):
