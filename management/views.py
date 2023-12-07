@@ -1,11 +1,11 @@
 import csv
 
+from django.db import transaction
 from django.db.models import Avg, Count, Q
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
 from django.views.generic import ListView
-from django.db import transaction
 
 from account.models import Applyment, User
 from core.mixins import ManagerOnlyMixin
@@ -85,7 +85,7 @@ class ApplymentSearchView(ManagerOnlyMixin, ListView):
     작가등록신청 검색 View
 
     Attrs:
-        context_object_name:    "applyments"
+        context_object_name:    'applyments'
         template_name:          작가등록신청관리 템플릿
 
     Raises:
@@ -93,7 +93,7 @@ class ApplymentSearchView(ManagerOnlyMixin, ListView):
         NOT is_manager:         401_UNAUTHORIZED
 
     Returns:
-        No Keyword:     비어있는 목록 출력
+        No Keyword:                     비어있는 목록 출력
         Option:
             name, email:                keyword를 포함하는 검색 결과
             gender, birth_date, phone:  keyword와 일치하는 검색 결과
