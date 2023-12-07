@@ -5,10 +5,10 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView
 
+from gallery.models import Artist, Exhibition
+
 from .forms import ApplymentCreateForm, UserCreateForm
 from .models import User
-
-from gallery.models import Artist, Exhibition
 
 
 class UserCreateView(CreateView):
@@ -40,7 +40,7 @@ class UserLoginView(LoginView):
 
     Returns:
         GET:    로그인 페이지
-        POST:   로그인 요청 결과
+        POST:   로그인 요청 후 성공 페이지
     '''
     model = User
     template_name = 'account/login.html'
@@ -76,7 +76,7 @@ class UserLogoutView(LogoutView):
         next_page:  메인페이지
 
     Returns:
-        메인페이지
+        로그아웃 요청 후 메인페이지
     '''
     model = User
     next_page = "gallery:index"
@@ -92,6 +92,7 @@ class ApplymentCreateView(LoginRequiredMixin, View):
             is_artist:              401_UNAUTHORIZED
         POST:
             form invalid:           Form Error 출력
+
     Returns:
         GET:    작가등록신청 페이지
         POST:   작가등록신청 후 메인페이지
