@@ -1,3 +1,34 @@
+<details>
+<summary><Strong>Table of Contents</strong></summary>
+<div markdown="1">
+<br>
+
+> ### [Introduction](#introduction-1)
+>
+> - Environment
+> - Deployment
+> - Test Accounts
+>
+> ### [Structure](#structure-1)
+>
+> - DB Schema
+> - Server Structure
+> - Endpoints
+>
+> ### [Features](#features-1)
+>
+> - 기본요구사항
+> - 추가요구사항
+>
+> ### [Demo](#demo-1)
+>
+> ### [Installation](#installation-1)
+>
+> ### [Room For Improvement](#room-for-improvement-1)
+
+</div>
+</details>
+
 # Introduction
 
 ### Environment
@@ -62,11 +93,11 @@
 |                                |        로그인         |     [link](https://develearn.co.kr/account/login/)     |        -         |           [로그인 성공 페이지](https://github.com/jjiisub/Django-gallery/wiki/로그인-성공-페이지)           |
 |                                |     작가목록 조회     |      [link](https://develearn.co.kr/artist/list/)      |        -         |                                                      -                                                      |
 |                                |     작품목록 조회     |     [link](https://develearn.co.kr/artwork/list/)      |        -         |                                                      -                                                      |
-|                                |     작가등록 신청     |     [link](https://develearn.co.kr/account/apply/)     |      `User`      |                                                                                                             |
-| <strong>관리자 페이지</strong> |       대시보드        |   [link](https://develearn.co.kr/account/dashboard/)   |    `Manager`     |                                                                                                             |
+|                                |     작가등록 신청     |     [link](https://develearn.co.kr/account/apply/)     |      `User`      |                                                      -                                                      |
+| <strong>관리자 페이지</strong> |       대시보드        |   [link](https://develearn.co.kr/account/dashboard/)   |    `Manager`     |                                                      -                                                      |
 |                                | 작가등록신청내역 조회 |   [link](https://develearn.co.kr/management/apply/)    |    `Manager`     |            [일괄처리](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-일괄처리)             |
 |                                |       작가통계        | [link](https://develearn.co.kr/management/statistics/) |    `Manager`     |                    [통계 계산](https://github.com/jjiisub/Django-gallery/wiki/작가-통계)                    |
-|  <strong>작가 페이지</strong>  |       대시보드        |   [link](https://develearn.co.kr/account/dashboard/)   |     `Artist`     |                                                                                                             |
+|  <strong>작가 페이지</strong>  |       대시보드        |   [link](https://develearn.co.kr/account/dashboard/)   |     `Artist`     |                                                      -                                                      |
 |                                |       작품등록        |    [link](https://develearn.co.kr/artwork/create/)     |     `Artist`     |            [가격콤마표시](https://github.com/jjiisub/Django-gallery/wiki/작품등록-가격-콤마표시)            |
 |                                |       전시등록        |   [link](https://develearn.co.kr/exhibition/create/)   |     `Artist`     |            [작품목록출력](https://github.com/jjiisub/Django-gallery/wiki/전시등록-작품목록-form)            |
 |     <strong>공통</strong>      |      Validation       |                           -                            |        -         |             [Field Validation](https://github.com/jjiisub/Django-gallery/wiki/Field-Validation)             |
@@ -82,6 +113,10 @@
 
 - [작가등록신청관리 CSV 다운로드](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-CSV-다운로드)
 
+- [추가 작가별 통계치](https://github.com/jjiisub/Django-gallery/wiki/추가-작가별-통계치)
+
+- [쿼리 최적화](https://github.com/jjiisub/Django-gallery/wiki/DB-쿼리-최적화)
+
 # Demo
 
 ### 고객 페이지
@@ -90,11 +125,15 @@
 | :-------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
 | <img width="300" alt="메인" src="https://github.com/jjiisub/Django-gallery/assets/89283288/04464c66-2278-47ac-a914-a7e33456da93"> | <img width="300" alt="로그인" src="https://github.com/jjiisub/Django-gallery/assets/89283288/d57a582b-05d9-47b1-9950-ee90c664d132"> | <img width="300" alt="회원가입" src="https://github.com/jjiisub/Django-gallery/assets/89283288/72bf5f82-56c1-4e15-9ec8-aec7927412f7"> |
 
+|                                                               작가목록 조회                                                                |                                                               작품목록 조회                                                                |                                                               작가등록 신청                                                                |
+| :----------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: |
+| <img width="300" alt="고객-작가목록" src="https://github.com/jjiisub/Django-gallery/assets/89283288/f2d742a9-58c3-4f73-95ac-6b8a3862ac4a"> | <img width="300" alt="고객-작품목록" src="https://github.com/jjiisub/Django-gallery/assets/89283288/1a106ecf-891f-4d1b-9b01-f2ff47025b9f"> | <img width="300" alt="고객-작가신청" src="https://github.com/jjiisub/Django-gallery/assets/89283288/d4c88aeb-f13b-4f55-85c2-23d5d8f91a9f"> |
+
 ### 관리자 페이지
 
 |                                                                   대시보드                                                                   |                                                             작가등록신청내역조회                                                             |                                                                 작가통계                                                                 |
 | :------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------: |
-| <img width="300" alt="관리자-대시보드" src="https://github.com/jjiisub/Django-gallery/assets/89283288/7cae8688-2ea2-4ad1-b95b-55f532e6de83"> | <img width="300" alt="관리자-등록관리" src="https://github.com/jjiisub/Django-gallery/assets/89283288/8102675a-f93a-4f33-a5eb-8a84d0cb0daf"> | <img width="300" alt="관리자-통계" src="https://github.com/jjiisub/Django-gallery/assets/89283288/561d5759-9d03-45ac-b6ad-a94808983b8e"> |
+| <img width="300" alt="관리자-대시보드" src="https://github.com/jjiisub/Django-gallery/assets/89283288/7cae8688-2ea2-4ad1-b95b-55f532e6de83"> | <img width="300" alt="관리자-등록관리" src="https://github.com/jjiisub/Django-gallery/assets/89283288/0ba4b52d-3bca-4800-ab82-9280103c6f3b"> | <img width="300" alt="관리자-통계" src="https://github.com/jjiisub/Django-gallery/assets/89283288/d0fcae67-0f1a-4f4d-9a98-c3fc84427215"> |
 
 ### 작가 페이지
 
@@ -114,6 +153,11 @@
 
 ```bash
 $ git clone https://github.com/jjiisub/Django-gallery.git
+```
+
+### Prerequisites
+
+```bash
 $ cd Django-gallery
 $ pip install -r requirements.txt
 ```
@@ -142,8 +186,8 @@ $ python manage.py runserver
 
 # Room For Improvement
 
-- 가격콤마표시 Number 함수 크기 제한
+- [작품등록 가격콤마 출력](https://github.com/jjiisub/Django-gallery/wiki/작품등록-가격콤마-Number-함수)
 
-- DB created_at Index..?
+- [작가등록신청관리 일괄처리](https://github.com/jjiisub/Django-gallery/wiki/작가등록신청관리-일괄처리-Transaction)
 
-- select_related VS prefetch_related
+- [DB "created_at" Field Index](https://github.com/jjiisub/Django-gallery/wiki/DB-Index)
