@@ -1,7 +1,7 @@
 import csv
 
 from django.db import transaction
-from django.db.models import Avg, Count, Q
+from django.db.models import Avg, Count, Max, Q
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.views import View
@@ -180,9 +180,9 @@ class ArtistStatisticsView(ManagerOnlyMixin, ListView):
         '''
         queryset = Artist.objects.annotate(
             artwork_count=Count('artworks', distinct=True),
-            exhibition_count=Count('exhibitions', distinct=True),
             artwork_count_lte_size_100=Count(
                 'artworks', filter=Q(artworks__size__lte=100), distinct=True),
             artwork_avg_price=Avg('artworks__price'),
+            artwork_max=Max('artworks__size'),
         ).order_by('created_at')
         return queryset
