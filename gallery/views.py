@@ -61,7 +61,7 @@ class ArtistSearchView(ListView):
         작가 검색 결과 queryset method
 
         Returns:
-            No Keyword:     비어있는 목록 출력
+            No Keyword:                     비어있는 목록 출력
             Option:
                 name, email:                keyword를 포함하는 검색 결과
                 gender, birth_date, phone:  keyword와 일치하는 검색 결과
@@ -95,13 +95,14 @@ class ArtworkListView(ListView):
     template_name = 'gallery/artwork_list.html'
 
     def get_queryset(self):
+        '''작품 목록조회 queryset method'''
         queryset = Artwork.objects.all().select_related("artist")
         return queryset
 
 
 class ArtworkSearchView(ListView):
     '''
-    작가 검색 View
+    작품 검색 View
 
     Attrs:
         context_object_name:    "artworks"
@@ -133,8 +134,8 @@ class ArtworkSearchView(ListView):
             queryset = Artwork.objects.filter(
                 title__icontains=keyword).select_related('artist').order_by('-created_at')
         elif option == 'price' or option == 'size':
-            comp = self.request.GET.get("search-option-compare")
-            option_compare = '__gte' if comp == "more" else '__lte'
+            option_compare_raw = self.request.GET.get("search-option-compare")
+            option_compare = '__gte' if option_compare_raw == "more" else '__lte'
             try:
                 queryset = Artwork.objects.filter(
                     **{f'{option}{option_compare}': keyword}).select_related('artist').order_by('-created_at')
